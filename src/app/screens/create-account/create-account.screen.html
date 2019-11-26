@@ -1,0 +1,11 @@
+<form [formGroup]="accountForm">
+  <h2>Create an Account</h2>
+  <div class='error'>{{error}}</div>
+  <div class='success'>{{success}}</div>
+  <input type='text' formControlName="username" placeholder='Please enter your username' />
+  <input type='password' formControlName="password" placeholder='Please enter your password' />
+  <input type='text' formControlName="email" placeholder='Please enter your email address' />
+  <input type='text' formControlName="firstName" placeholder='Please enter your first name' />
+  <input type='text' formControlName="lastName" placeholder='Please enter your last name' />
+  <div class='button' (click)="createAccount()">Create Account</div>
+</form>

@@ -1,0 +1,9 @@
+<form [formGroup]="loginForm">
+  <h2>Login to Your Account</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="identification" placeholder='Please enter your username or email address' />
+  <input type='password' formControlName="password" placeholder='Please enter your password' />
+  <div class='button' (click)="login()">Login</div>
+  <div>Don't have an account?</div>
+  <a [routerLink]="['/create-account']">Create one now</a>
+</form>
