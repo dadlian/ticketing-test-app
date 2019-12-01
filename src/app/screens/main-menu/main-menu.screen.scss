@@ -1,0 +1,16 @@
+.menu{
+  color:#FFFFFF;
+  background-color:#0022AA;
+  display:flex;
+  justify-content: flex-end;
+  padding:10px;
+  margin-bottom:50px;
+
+  span{
+    margin-right:10px;
+  }
+
+  span:last-child{
+    cursor:pointer;
+  }
+}

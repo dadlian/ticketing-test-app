@@ -1,0 +1,17 @@
+<form [formGroup]="hostForm">
+  <h2>Create an Account</h2>
+  <div class='error'>{{error}}</div>
+  <div class='success'>{{success}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter the host name' />
+  <input type='text' formControlName="description" placeholder='Please enter the host description' />
+  <input type='text' formControlName="contact" placeholder='Please enter the host contact' />
+  <input type='email' formControlName="email" placeholder='Please enter the host email' />
+  <input type='phone' formControlName="phone" placeholder='Please enter the host phone' />
+  <input type='text' formControlName="website" placeholder='Please enter the host website' />
+  <input type='text' formControlName="firstAddressLine" placeholder='Please enter the host first address line' />
+  <input type='text' formControlName="secondAddressLine" placeholder='Please enter the host second address line' />
+  <input type='text' formControlName="city" placeholder='Please enter the host city' />
+  <input type='text' formControlName="state" placeholder='Please enter the host state' />
+  <input type='text' formControlName="country" placeholder='Please enter the host country' />
+  <div class='button' (click)="registerHost()">Register Host</div>
+</form>

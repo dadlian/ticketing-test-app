@@ -26,8 +26,7 @@ export class LoginScreen{
     this.error = "";
 
     this._sessionManager.login(this.loginForm.value.identification,this.loginForm.value.password).then((session: Session) => {
-      let route = session.account.verified?"/home":"/verify-account";
-      this._router.navigate([route,session.account.number]);
+      this._router.navigate(["/home"]);
     }).catch((error: number) => {
       switch(error){
         case UNAUTHORISED_ACCESS:

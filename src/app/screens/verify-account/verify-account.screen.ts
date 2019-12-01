@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TickeTing, NOT_UNIQUE } from '@ticketing/angular';
+
+import { SessionManager } from '../../services/session.manager';
 
 @Component({
   templateUrl: './verify-account.screen.html',
@@ -11,7 +13,7 @@ export class VerifyAccountScreen{
   public error: string;
   public verifyAccountForm: FormGroup;
 
-  constructor(private _ticketing: TickeTing, private _router: Router, private _activatedRoute: ActivatedRoute){
+  constructor(private _ticketing: TickeTing, private _router: Router, private _sessionManager: SessionManager){
     this.error = "";
 
     this.verifyAccountForm = new FormGroup({
@@ -22,7 +24,7 @@ export class VerifyAccountScreen{
   verifyAccount(){
     this.error = "";
 
-    this._ticketing.account.verify(this._activatedRoute.snapshot.paramMap.get("account"),this.verifyAccountForm.value.code).then((success: boolean) => {
+    this._sessionManager.getActiveSession().account.verify(this.verifyAccountForm.value.code).then((success: boolean) => {
       if(success){
         this._router.navigate(["/home"]);
       }else{

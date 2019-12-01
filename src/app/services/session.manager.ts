@@ -32,8 +32,10 @@ export class SessionManager{
     return new Promise<boolean>((resolve)=>{
       if(this._activeSession){
         resolve(true)
-      }else if (!this._initialised){
-        resolve(this._initialise())
+      }else if(!this._initialised){
+        this._initialise().then(result => {
+          resolve(result)
+        })
       }else{
         resolve(false)
       }
@@ -57,12 +59,13 @@ export class SessionManager{
   }
 
   private _initialise(): Promise<boolean>{
-    this._initialised = true;
     return new Promise((resolve, reject) => {
       this._ticketing.session.continue(localStorage.getItem("ticketing-test-app-session")).then((session: Session) => {
         this._activeSession = session;
+        this._initialised = true;
         resolve(true)
       }).catch((error: number) => {
+        this._initialised = true;
         resolve(false)
         reject(error)
       })
