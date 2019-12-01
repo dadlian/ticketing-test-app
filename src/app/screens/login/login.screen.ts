@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TickeTing, Session, UNAUTHORISED_ACCESS } from '@ticketing/angular';
+import { Session, UNAUTHORISED_ACCESS } from '@ticketing/angular';
+
+import { SessionManager } from '../../services/session.manager';
 
 @Component({
   templateUrl: './login.screen.html',
@@ -11,7 +13,7 @@ export class LoginScreen{
   public error: string;
   public loginForm: FormGroup;
 
-  constructor(private _ticketing: TickeTing, private _router: Router){
+  constructor(private _router: Router, private _sessionManager: SessionManager){
     this.error = "";
 
     this.loginForm = new FormGroup({
@@ -23,8 +25,9 @@ export class LoginScreen{
   login(){
     this.error = "";
 
-    this._ticketing.startSession(this.loginForm.value.identification,this.loginForm.value.password).then((session: Session) => {
-      this._router.navigate(["/verify-account",session.account.number]);
+    this._sessionManager.login(this.loginForm.value.identification,this.loginForm.value.password).then((session: Session) => {
+      let route = session.account.verified?"/home":"/verify-account";
+      this._router.navigate([route,session.account.number]);
     }).catch((error: number) => {
       switch(error){
         case UNAUTHORISED_ACCESS:

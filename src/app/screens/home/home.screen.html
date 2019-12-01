@@ -1,1 +1,14 @@
 <h1>Welcome to TickeTing!</h1>
+<div class='error'>{{error}}</div>
+<div class='button' (click)="logout()">Logout</div>
+<h2>Account Details</h2>
+<div>
+  <div class='field'>
+    <label>Username</label>
+    <span>{{account?.username}}</span>
+  </div>
+  <div class='field'>
+    <label>Name</label>
+    <span>{{account?.firstName}} {{account?.lastName}}</span>
+  </div>
+</div>

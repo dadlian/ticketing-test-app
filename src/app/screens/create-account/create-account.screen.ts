@@ -26,7 +26,7 @@ export class CreateAccountScreen{
   createAccount(){
     this.error = "";
 
-    this._ticketing.createAccount({
+    this._ticketing.account.create({
       username: this.accountForm.value.username,
       email: this.accountForm.value.email,
       firstName: this.accountForm.value.firstName,

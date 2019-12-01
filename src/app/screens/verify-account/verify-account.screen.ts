@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TickeTing } from '@ticketing/angular';
+import { TickeTing, NOT_UNIQUE } from '@ticketing/angular';
 
 @Component({
   templateUrl: './verify-account.screen.html',
@@ -22,14 +22,21 @@ export class VerifyAccountScreen{
   verifyAccount(){
     this.error = "";
 
-    this._ticketing.verifyAccount(this._activatedRoute.snapshot.paramMap.get("account"),this.verifyAccountForm.value.code).then((success: boolean) => {
+    this._ticketing.account.verify(this._activatedRoute.snapshot.paramMap.get("account"),this.verifyAccountForm.value.code).then((success: boolean) => {
       if(success){
         this._router.navigate(["/home"]);
       }else{
         this.error = "Your account code not be verified with the provided code."
       }
     }).catch((error: number) => {
-      this.error = "The TickeTing server experienced an error. Please try again later."
+      switch(error){
+        case NOT_UNIQUE:
+          this.error = "This account has already been verified.";
+          break;
+        default:
+          this.error = "The TickeTing server experienced an error. Please try again later."
+          break;
+        }
     })
   }
 }
