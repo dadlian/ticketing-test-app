@@ -17,17 +17,17 @@ export class CreateHostScreen{
     this.error = "";
 
     this.hostForm = new FormGroup({
-      name: new FormControl(),
-      description: new FormControl(),
-      contact: new FormControl(),
-      email: new FormControl(),
-      phone: new FormControl(),
-      website: new FormControl(),
-      firstAddressLine: new FormControl(),
-      secondAddressLine: new FormControl(),
-      city: new FormControl(),
-      state: new FormControl(),
-      country: new FormControl()
+      name: new FormControl(""),
+      description: new FormControl(""),
+      contact: new FormControl(""),
+      email: new FormControl(""),
+      phone: new FormControl(""),
+      website: new FormControl(""),
+      firstAddressLine: new FormControl(""),
+      secondAddressLine: new FormControl(""),
+      city: new FormControl(""),
+      state: new FormControl(""),
+      country: new FormControl("")
     })
   }
 
