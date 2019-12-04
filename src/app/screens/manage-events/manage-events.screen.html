@@ -1,0 +1,12 @@
+<h2>Manage Your Events</h2>
+<div class='list'>
+  <div class='host' *ngFor="let event of host?.events | async">
+    <img src='{{event.thumbnail}}' />
+    <div>
+      <div class='name'>{{event.title}}</div>
+      <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
+      <div>{{event.venue.name}}</div>
+    </div>
+  </div>
+  <div class='button' (click)="registerHost()">Create Event</div>
+</div>

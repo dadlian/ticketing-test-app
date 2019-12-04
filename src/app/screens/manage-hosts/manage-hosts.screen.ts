@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Host, TickeTing, UNAUTHORISED_ACCESS } from '@ticketing/angular';
+import { Host, TickeTing } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 

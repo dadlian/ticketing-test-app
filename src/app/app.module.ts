@@ -19,6 +19,7 @@ import { VerifyAccountScreen } from './screens/verify-account/verify-account.scr
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
+import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CreateHostScreen } from './screens/create-host/create-host.screen';
     VerifyAccountScreen,
     MainMenuScreen,
     ManageHostsScreen,
-    CreateHostScreen
+    CreateHostScreen,
+    ManageEventsScreen
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { VerifyAccountScreen } from './screens/verify-account/verify-account.scr
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
+import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
       {
         path:'create-host',
         component:CreateHostScreen
+      },
+      {
+        path:'hosts/:host/events',
+        component:ManageEventsScreen
       }
     ]
   },
