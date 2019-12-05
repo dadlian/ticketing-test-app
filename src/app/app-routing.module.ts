@@ -13,6 +13,8 @@ import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
+import { CreateEventScreen } from './screens/create-event/create-event.screen';
+import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 
 
 const routes: Routes = [
@@ -51,8 +53,16 @@ const routes: Routes = [
         component:CreateHostScreen
       },
       {
-        path:'hosts/:host/events',
+        path:'hosts/:host',
         component:ManageEventsScreen
+      },
+      {
+        path:'hosts/:host/create-event',
+        component:CreateEventScreen
+      },
+      {
+        path:'events/create-showing',
+        component:CreateShowingScreen
       }
     ]
   },

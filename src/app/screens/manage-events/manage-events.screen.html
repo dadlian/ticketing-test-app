@@ -1,12 +1,22 @@
 <h2>Manage Your Events</h2>
 <div class='list'>
   <div class='host' *ngFor="let event of host?.events | async">
-    <img src='{{event.thumbnail}}' />
-    <div>
-      <div class='name'>{{event.title}}</div>
-      <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
-      <div>{{event.venue.name}}</div>
+    <div class='event-details'>
+      <img src='{{event.thumbnail}}' />
+      <div>
+        <div class='name'>{{event.title}}</div>
+        <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
+        <div>{{event.venue.name}}</div>
+      </div>
     </div>
+    <h3>Showings</h3>
+    <div class='showings' *ngIf="(event.showings | async)?.length">
+      <div class='showing' *ngFor="let showing of event.showings | async">
+        <div>{{showing.title}}</div>
+        <div>{{showing.start | date:'dd MMMM, yyyy hh:mm'}}</div>
+      </div>
+    </div>
+    <a class='link' (click)="createShowing(event)">+ Add Showing</a>
   </div>
-  <div class='button' (click)="registerHost()">Create Event</div>
+  <div class='button' [routerLink]="['/home/hosts',host?.name,'create-event']">Create Event</div>
 </div>

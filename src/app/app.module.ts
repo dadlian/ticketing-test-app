@@ -12,6 +12,7 @@ import { VerifiedGuard } from './guards/verified.guard';
 import { UnverifiedGuard } from './guards/unverified.guard';
 
 import { SessionManager } from './services/session.manager';
+import { EventManager } from './services/event.manager';
 
 import { LoginScreen } from './screens/login/login.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
@@ -20,6 +21,8 @@ import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
+import { CreateEventScreen } from './screens/create-event/create-event.screen';
+import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { ManageEventsScreen } from './screens/manage-events/manage-events.screen
     MainMenuScreen,
     ManageHostsScreen,
     CreateHostScreen,
-    ManageEventsScreen
+    ManageEventsScreen,
+    CreateEventScreen,
+    CreateShowingScreen
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,7 @@ import { ManageEventsScreen } from './screens/manage-events/manage-events.screen
   ],
   providers: [
     SessionManager,
+    EventManager,
     AuthorisedGuard,
     UnauthorisedGuard,
     VerifiedGuard,

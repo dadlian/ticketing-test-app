@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Host, TickeTing } from '@ticketing/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Event, Host, TickeTing } from '@ticketing/angular';
 import { SessionManager } from '../../services/session.manager';
+import { EventManager } from '../../services/event.manager';
 
 @Component({
   templateUrl: './manage-events.screen.html',
@@ -10,7 +11,8 @@ import { SessionManager } from '../../services/session.manager';
 export class ManageEventsScreen{
   public host: Host;
 
-  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _sessionManager: SessionManager){
+  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _router: Router,
+              private _sessionManager: SessionManager, private _eventManager: EventManager){
     this.host = null;
   }
 
@@ -23,5 +25,10 @@ export class ManageEventsScreen{
         }
       }
     })
+  }
+
+  createShowing(event: Event){
+    this._eventManager.setActiveEvent(event)
+    this._router.navigate(["/home/events/create-showing"]);
   }
 }
