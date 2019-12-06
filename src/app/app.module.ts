@@ -10,6 +10,7 @@ import { AuthorisedGuard } from './guards/authorised.guard';
 import { UnauthorisedGuard } from './guards/unauthorised.guard';
 import { VerifiedGuard } from './guards/verified.guard';
 import { UnverifiedGuard } from './guards/unverified.guard';
+import { ActiveEventGuard } from './guards/active-event.guard';
 
 import { SessionManager } from './services/session.manager';
 import { EventManager } from './services/event.manager';
@@ -23,6 +24,8 @@ import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
+import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
+import { CreateSectionScreen } from './screens/create-section/create-section.screen';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { CreateShowingScreen } from './screens/create-showing/create-showing.scr
     CreateHostScreen,
     ManageEventsScreen,
     CreateEventScreen,
-    CreateShowingScreen
+    CreateShowingScreen,
+    EventDetailScreen,
+    CreateSectionScreen
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { CreateShowingScreen } from './screens/create-showing/create-showing.scr
     AuthorisedGuard,
     UnauthorisedGuard,
     VerifiedGuard,
-    UnverifiedGuard
+    UnverifiedGuard,
+    ActiveEventGuard
   ],
   bootstrap: [AppComponent]
 })

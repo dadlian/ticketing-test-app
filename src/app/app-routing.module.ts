@@ -5,6 +5,7 @@ import { AuthorisedGuard } from './guards/authorised.guard';
 import { UnauthorisedGuard } from './guards/unauthorised.guard';
 import { VerifiedGuard } from './guards/verified.guard';
 import { UnverifiedGuard } from './guards/unverified.guard';
+import { ActiveEventGuard } from './guards/active-event.guard';
 
 import { LoginScreen } from './screens/login/login.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
@@ -15,6 +16,8 @@ import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
+import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
+import { CreateSectionScreen } from './screens/create-section/create-section.screen';
 
 
 const routes: Routes = [
@@ -62,7 +65,18 @@ const routes: Routes = [
       },
       {
         path:'events/create-showing',
-        component:CreateShowingScreen
+        component:CreateShowingScreen,
+        canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'events/detail',
+        component:EventDetailScreen,
+        canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'events/create-section',
+        component:CreateSectionScreen,
+        canActivate:[ActiveEventGuard]
       }
     ]
   },

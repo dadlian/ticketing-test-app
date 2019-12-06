@@ -16,4 +16,8 @@ export class EventManager{
   getActiveEvent(){
     return this._activeEvent;
   }
+
+  hasActiveEvent(): boolean{
+    return this._activeEvent !== null;
+  }
 }

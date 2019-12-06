@@ -1,0 +1,23 @@
+<form [formGroup]="sectionForm">
+  <h2>Add a section to your Event</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter a section name (General, VIP, etc.)' />
+  <div class='date'>
+    <label>Capacity</label>
+    <input type='number' formControlName="capacity" />
+  </div>
+  <div class='date'>
+    <label>Base Price</label>
+    <input type='number' formControlName="basePrice" />
+  </div>
+  <div class='date'>
+    <label>Sales Start</label>
+    <input type='datetime-local' formControlName="salesStart" />
+  </div>
+  <div class='date'>
+    <label>Sales End</label>
+    <input type='datetime-local' formControlName="salesEnd" />
+  </div>
+  <textarea type='text' formControlName="description" placeholder='Please enter a section description'></textarea>
+  <div class='button' (click)="createSection()">Add Section</div>
+</form>

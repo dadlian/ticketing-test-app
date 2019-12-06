@@ -39,7 +39,7 @@ export class CreateShowingScreen{
   createShowing(){
     this.error = "";
 
-    this._event.createShowing({
+    this._event.addShowing({
       type: this.showingForm.value.type,
       title: this.showingForm.value.title,
       description: this.showingForm.value.description,

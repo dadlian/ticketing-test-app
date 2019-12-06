@@ -1,0 +1,21 @@
+<div class='event-details'>
+  <a (click)="goBack()" class="back">&laquo;Back</a>
+  <img src='{{event.banner}}' />
+  <div class='details'>
+    <h2>{{event.title}}</h2>
+    <div>{{event.start | date:'dd MMMM, yyyy'}}</div>
+    <div>{{event.venue.name}}</div>
+  </div>
+  <div class='sections'>
+    <h2>Sections</h2>
+    <div class='section' *ngFor="let section of event.sections">
+      <div class='details'>
+        <div>{{section.name}}</div>
+        <div>From {{section.salesStart | date:'dd MMMM, yyyy'}}</div>
+        <div>{{section.basePrice | currency}}</div>
+      </div>
+      <a>+ Add Modifier</a>
+    </div>
+    <div class='button' [routerLink]="['/home/events/create-section']">Add Section</div>
+  </div>
+</div>

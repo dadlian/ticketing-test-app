@@ -11,8 +11,14 @@
   <input type='text' formControlName="category" placeholder='Please enter an event category' />
   <input type='text' formControlName="subcategory" placeholder='Please enter an event subcategory' />
   <input type='text' formControlName="venue" placeholder='Please enter the event venue' />
-  <input type='datetime-local' formControlName="start" placeholder='Please enter the event start time' />
-  <input type='datetime-local' formControlName="end" placeholder='Please enter the event end time' />
+  <div class='date'>
+    <label>Event Start</label>
+    <input type='datetime-local' formControlName="start" />
+  </div>
+  <div class='date'>
+    <label>Event End</label>
+    <input type='datetime-local' formControlName="end" placeholder='Please enter the event end time' />
+  </div>
   <div class='checkbox'>
     <label>Public</label>
     <input type='checkbox' formControlName="public" />

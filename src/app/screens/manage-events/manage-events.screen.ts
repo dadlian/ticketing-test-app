@@ -31,4 +31,9 @@ export class ManageEventsScreen{
     this._eventManager.setActiveEvent(event)
     this._router.navigate(["/home/events/create-showing"]);
   }
+
+  selectEvent(event: Event){
+    this._eventManager.setActiveEvent(event)
+    this._router.navigate(["/home/events/detail"]);
+  }
 }
