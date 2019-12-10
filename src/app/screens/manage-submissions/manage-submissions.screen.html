@@ -1,0 +1,18 @@
+<h1>Manage Submissions</h1>
+<div class='message' *ngIf="submissions.length == 0">There are currently no submissions for your review</div>
+<table *ngIf="submissions.length > 0">
+  <tr>
+    <th></th>
+    <th>Title</th>
+    <th>Venue</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let submission of submissions">
+    <td><img src='{{submission.thumbnail}}' /></td>
+    <td>{{submission.title}}</td>
+    <td>{{submission.start | date:'dd MMMM, yyyy'}}</td>
+    <td>{{submission.venue.name}}</td>
+    <td><div class='button' (click)="publish(submission)">Publish</div></td>
+  </tr>
+</table>

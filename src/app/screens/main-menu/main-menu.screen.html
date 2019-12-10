@@ -1,5 +1,11 @@
 <div class='menu'>
-  <span>Hi, {{account?.firstName}}!</span>
-  <span (click)='logout()'>(Logout)</span>
+  <div class='options'>
+    <div [routerLink]="['home']">Home</div>
+    <div *ngIf="account?.role == 'administrator'" [routerLink]="['submissions']">Submissions</div>
+  </div>
+  <div>
+    <span>Hi, {{account?.firstName}}!</span>
+    <span (click)='logout()'>(Logout)</span>
+  </div>
 </div>
 <router-outlet></router-outlet>

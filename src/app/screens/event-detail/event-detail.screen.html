@@ -1,10 +1,13 @@
 <div class='event-details'>
   <a (click)="goBack()" class="back">&laquo;Back</a>
   <img src='{{event.banner}}' />
-  <div class='details'>
-    <h2>{{event.title}}</h2>
-    <div>{{event.start | date:'dd MMMM, yyyy'}}</div>
-    <div>{{event.venue.name}}</div>
+  <div class='event-row'>
+    <div class='details'>
+      <h2>{{event.title}}</h2>
+      <div>{{event.start | date:'dd MMMM, yyyy'}}</div>
+      <div>{{event.venue.name}}</div>
+    </div>
+    <div class='button submit' [ngClass]="{inactive:event.status !== 'Draft'}" (click)="submitEvent()">Submit Event</div>
   </div>
   <div class='sections'>
     <h2>Sections</h2>
@@ -14,7 +17,18 @@
         <div>From {{section.salesStart | date:'dd MMMM, yyyy'}}</div>
         <div>{{section.basePrice | currency}}</div>
       </div>
-      <a>+ Add Modifier</a>
+      <div *ngIf="section.modifiers.length > 0">
+        <h3>Modifiers</h3>
+        <ul>
+          <li *ngFor="let modifier of section.modifiers" class='modifier'>
+            <div class='title'>{{modifier.name}}</div>
+            <div class='details'>
+              <span>{{section.basePrice + modifier.priceDelta | currency}}</span>
+              <span>{{modifier.availableFrom | date:'dd MMMM, yyyy hh:mm'}} to {{modifier.availableTo | date:'dd MMMM, yyyy hh:mm'}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class='button' [routerLink]="['/home/events/create-section']">Add Section</div>
   </div>

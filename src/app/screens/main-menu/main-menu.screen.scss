@@ -2,9 +2,21 @@
   color:#FFFFFF;
   background-color:#0022AA;
   display:flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding:10px;
   margin-bottom:50px;
+
+  .options{
+    display:flex;
+
+    div{
+      margin:0px 15px;
+    }
+  }
+
+  div{
+    cursor:pointer;
+  }
 
   span{
     margin-right:10px;

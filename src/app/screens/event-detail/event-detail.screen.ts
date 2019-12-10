@@ -21,4 +21,16 @@ export class EventDetailScreen{
   goBack(){
     window.history.back();
   }
+
+  submitEvent(){
+    if(this.event.status !== 'Draft'){
+      return;
+    }
+    
+    this.event.submit().then(result => {
+      if(result){
+        this.event.status = 'Under Review'
+      }
+    })
+  }
 }

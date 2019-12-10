@@ -66,4 +66,56 @@ form{
     border:0px;
     padding:10px;
   }
+
+  h3{
+    margin-bottom:0px;
+    text-align:left;
+  }
+
+  a{
+    color:#0022AA;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 0px;
+    display: block;
+    text-align: left;
+  }
+
+  .modifiers{
+    ul{
+       margin-top:0px;
+    }
+
+    .modifier{
+      .title{
+        font-weight:bold;
+        text-align: left;
+      }
+
+      .details{
+        display:flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.overlay{
+  position: absolute;
+  z-index:9999;
+  background-color:rgba(0,0,0,0.5);
+  width:100vw;
+  height:100vh;
+  top:0;
+
+  form{
+    background-color:#FFFFFF;
+    margin-top:50px;
+    padding: 20px 50px;
+    width: 400px;
+  }
+}
+
+.hidden{
+  display:none;
 }

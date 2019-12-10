@@ -26,6 +26,7 @@ import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CreateSectionScreen } from './screens/create-section/create-section.scr
     CreateEventScreen,
     CreateShowingScreen,
     EventDetailScreen,
-    CreateSectionScreen
+    CreateSectionScreen,
+    ManageSubmissionsScreen
   ],
   imports: [
     BrowserModule,

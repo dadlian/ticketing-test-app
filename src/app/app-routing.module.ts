@@ -18,6 +18,7 @@ import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 
 
 const routes: Routes = [
@@ -50,6 +51,10 @@ const routes: Routes = [
       {
         path:'',
         component:ManageHostsScreen
+      },
+      {
+        path:'submissions',
+        component:ManageSubmissionsScreen
       },
       {
         path:'create-host',
