@@ -46,6 +46,7 @@ const routes: Routes = [
   },
   {
     path:"",
+    canActivate:[AuthorisedGuard],
     canActivateChild:[AuthorisedGuard,VerifiedGuard],
     component: MainMenuScreen,
     children:[
