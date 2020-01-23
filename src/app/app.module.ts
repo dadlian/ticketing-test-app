@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TickeTingModule } from '@ticketing/angular';
 
@@ -19,6 +20,7 @@ import { LoginScreen } from './screens/login/login.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
 import { VerifyAccountScreen } from './screens/verify-account/verify-account.screen';
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
+import { HomeScreen } from './screens/home/home.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
@@ -35,6 +37,7 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
     CreateAccountScreen,
     VerifyAccountScreen,
     MainMenuScreen,
+    HomeScreen,
     ManageHostsScreen,
     CreateHostScreen,
     ManageEventsScreen,
@@ -46,6 +49,7 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     TickeTingModule

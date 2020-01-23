@@ -29,11 +29,11 @@ export class ManageEventsScreen{
 
   createShowing(event: Event){
     this._eventManager.setActiveEvent(event)
-    this._router.navigate(["/home/events/create-showing"]);
+    this._router.navigate(["/events/create-showing"]);
   }
 
   selectEvent(event: Event){
     this._eventManager.setActiveEvent(event)
-    this._router.navigate(["/home/events/detail"]);
+    this._router.navigate(["/events/detail"]);
   }
 }

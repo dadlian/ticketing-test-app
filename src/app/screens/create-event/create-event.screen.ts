@@ -67,7 +67,7 @@ export class CreateEventScreen{
       disclaimer:this.eventForm.value.disclaimer,
       tags:this.eventForm.value.tags.split(",")
     }).then((event: Event) => {
-      this._router.navigate(["/home/hosts/"+this.host.name]);
+      this._router.navigate(["/hosts/"+this.host.name]);
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:

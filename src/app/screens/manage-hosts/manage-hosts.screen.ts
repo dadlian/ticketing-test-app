@@ -26,6 +26,6 @@ export class ManageHostsScreen{
   }
 
   registerHost(){
-    this._router.navigate(["/home/create-host"])
+    this._router.navigate(["/create-host"])
   }
 }

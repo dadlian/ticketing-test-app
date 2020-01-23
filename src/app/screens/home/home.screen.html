@@ -1,0 +1,21 @@
+<h2>Welcome to TickeTing!</h2>
+<div class='search'>
+  <input type='text' [(ngModel)]="search" (keyup)="searchEvents()" />
+</div>
+<div class='filters'>
+  <div class='filter' (click)="filterEvents('upcoming')" [ngClass]="{'active':filter == 'upcoming'}">Upcoming</div>
+  <div class='filter' (click)="filterEvents('popular')" [ngClass]="{'active':filter == 'popular'}">Popular</div>
+  <div class='filter' (click)="filterEvents('new')" [ngClass]="{'active':filter == 'new'}">New</div>
+</div>
+<div class='list'>
+  <div class='host' *ngFor="let event of events" (click)="selectEvent(event)">
+    <div class='event-details'>
+      <img src='{{event.thumbnail}}' />
+      <div>
+        <div class='name'>{{event.title}}</div>
+        <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
+        <div>{{event.venue.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>

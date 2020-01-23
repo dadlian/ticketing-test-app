@@ -11,6 +11,7 @@ import { LoginScreen } from './screens/login/login.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
 import { VerifyAccountScreen } from './screens/verify-account/verify-account.screen';
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
+import { HomeScreen } from './screens/home/home.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
@@ -44,12 +45,16 @@ const routes: Routes = [
     ]
   },
   {
-    path:"home",
+    path:"",
     canActivateChild:[AuthorisedGuard,VerifiedGuard],
     component: MainMenuScreen,
     children:[
       {
-        path:'',
+        path:'home',
+        component:HomeScreen
+      },
+      {
+        path:'hosts',
         component:ManageHostsScreen
       },
       {
