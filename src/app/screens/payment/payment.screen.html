@@ -1,0 +1,23 @@
+<div class='order-details'>
+  <h2>Order Checkout</h2>
+  <div class='error'>{{error}}</div>
+  <div class='button' (click)="cancelOrder()">Cancel Order</div>
+  <div class='time-left'><strong>{{timeLeft.minutes | number:'2.0-0'}}:{{timeLeft.seconds | number:'2.0-0'}}</strong> to complete your order</div>
+  <div class='summary'>
+    <div class='field'>
+      <label>Event</label>
+      <span>{{order.items[0].event.title}}</span>
+    </div>
+    <div class='field'>
+      <label>Tickets</label>
+      <span *ngFor="let item of order.items">{{item.quantity}}x {{item.section.name}} - EC${{(item.section.basePrice + item.modifier.priceDelta) | currency:'':'':'.2-2'}}</span>
+      <span>Convenience Fees: EC${{order.convenienceFees | currency:'':'':'.2-2'}}</span>
+    </div>
+    <div class='field'>
+      <label>Total</label>
+      <span>EC${{(order.total + order.convenienceFees) | currency:'':'':'.2-2'}}</span>
+    </div>
+  </div>
+</div>
+<form>
+</form>

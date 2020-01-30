@@ -12,15 +12,19 @@ import { UnauthorisedGuard } from './guards/unauthorised.guard';
 import { VerifiedGuard } from './guards/verified.guard';
 import { UnverifiedGuard } from './guards/unverified.guard';
 import { ActiveEventGuard } from './guards/active-event.guard';
+import { ActiveOrderGuard } from './guards/active-order.guard';
 
 import { SessionManager } from './services/session.manager';
 import { EventManager } from './services/event.manager';
+import { OrderManager } from './services/order.manager';
 
 import { LoginScreen } from './screens/login/login.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
 import { VerifyAccountScreen } from './screens/verify-account/verify-account.screen';
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { HomeScreen } from './screens/home/home.screen';
+import { PlaceOrderScreen } from './screens/place-order/place-order.screen';
+import { PaymentScreen } from './screens/payment/payment.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
@@ -38,6 +42,8 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
     VerifyAccountScreen,
     MainMenuScreen,
     HomeScreen,
+    PlaceOrderScreen,
+    PaymentScreen,
     ManageHostsScreen,
     CreateHostScreen,
     ManageEventsScreen,
@@ -57,11 +63,13 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
   providers: [
     SessionManager,
     EventManager,
+    OrderManager,
     AuthorisedGuard,
     UnauthorisedGuard,
     VerifiedGuard,
     UnverifiedGuard,
-    ActiveEventGuard
+    ActiveEventGuard,
+    ActiveOrderGuard
   ],
   bootstrap: [AppComponent]
 })

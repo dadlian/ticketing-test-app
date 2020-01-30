@@ -53,11 +53,10 @@ export class CreateSectionScreen{
     this.modifiers.push({
       name:this.modifierForm.value.name,
       priceDelta:this.modifierForm.value.priceDelta,
-      quantity:this.modifierForm.value.quantity,
       availableFrom:this.modifierForm.value.availableFrom.replace("T"," "),
       availableTo:this.modifierForm.value.availableTo.replace("T"," "),
-      minOrder:1,
-      maxOrder:1
+      minOrder:0,
+      maxOrder:0
     })
 
     this.modifierForm.reset()

@@ -1,0 +1,80 @@
+.event-details{
+  width:500px;
+  margin:0 auto;
+
+  .details{
+    h2{
+      margin-bottom:0px;
+    }
+
+    div{
+      margin-bottom:15px;
+    }
+  }
+
+  img{
+    width: 500px;
+    height: 275px;
+  }
+
+  .description{
+    margin-top:20px;
+  }
+}
+
+.tickets{
+  width:500px;
+  margin:0 auto;
+
+  .ticket{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top:solid 1px black;
+    padding:10px 0px;
+
+    .details{
+      .name{
+        font-weight:bold;
+        font-size:18px;
+      }
+
+      .price{
+        margin:5px 0px;
+        font-size:18px;
+      }
+
+      .date{
+        color:#666666;
+        font-size:16px;
+      }
+    }
+
+    select{
+      font-size:1.15em;
+      width:60px;
+      text-align:center;
+      height:25px;
+    }
+  }
+}
+
+.error{
+  color:#FF0000;
+  margin:20px 0px;
+  font-weight: bold;
+  text-align:center;
+}
+
+.button{
+  display:block;
+  background-color:#0022AA;
+  width:300px;
+  color:#FFFFFF;
+  outline:none;
+  border:0px;
+  padding:10px;
+  margin:0 auto;
+  text-align: center;
+  cursor:pointer;
+}
