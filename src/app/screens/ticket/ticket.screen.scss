@@ -1,0 +1,31 @@
+h2{
+  text-align:left;
+  width:620px;
+  margin:0px auto;
+}
+
+.host{
+  cursor:pointer;
+  width:600px;
+  display: flex;
+  justify-content: space-between;
+  margin:10px auto;
+  border:solid 1px #888888;
+  border-radius:5px;
+  padding:10px;
+  align-items: center;
+  font-family: sans-serif;
+
+  .name{
+    font-weight:bold;
+    font-size:20px;
+  }
+
+  .balance{
+    font-size:20px;
+  }
+}
+
+.list{
+  margin-bottom:25px;
+}

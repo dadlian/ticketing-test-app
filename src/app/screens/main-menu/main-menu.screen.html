@@ -1,6 +1,7 @@
 <div class='menu'>
   <div class='options'>
-    <div [routerLink]="['/home']">Home</div>
+    <div [routerLink]="['/']">Home</div>
+    <div [routerLink]="['/wallet']">Wallet</div>
     <div [routerLink]="['/hosts']">Hosts</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/submissions']">Submissions</div>
   </div>

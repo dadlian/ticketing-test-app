@@ -5,7 +5,7 @@
       <div class='name'>{{host.name}}</div>
       <div class='contact'>{{host.contact}}</div>
     </div>
-    <div class='balance'>Balance: {{0 | currency}}</div>
+    <div class='balance'>Balance: {{host.balance | currency}}</div>
   </div>
   <div class='button' (click)="registerHost()">Register Event Host</div>
 </div>

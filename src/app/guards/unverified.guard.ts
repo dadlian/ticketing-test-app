@@ -12,7 +12,7 @@ export class UnverifiedGuard implements CanActivate, CanActivateChild{
         if(hasActiveSession && !this._sessionManager.getActiveSession().account.verified){
           resolve(true)
         }else{
-          let route = hasActiveSession?"/home":"/login";
+          let route = hasActiveSession?"/":"/login";
           this._router.navigate([route]);
           resolve(false)
         }

@@ -26,7 +26,7 @@ export class LoginScreen{
     this.error = "";
 
     this._sessionManager.login(this.loginForm.value.identification,this.loginForm.value.password).then((session: Session) => {
-      this._router.navigate(["/home"]);
+      this._router.navigate(["/"]);
     }).catch((error: number) => {
       switch(error){
         case UNAUTHORISED_ACCESS:

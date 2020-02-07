@@ -15,6 +15,9 @@ import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
 import { HomeScreen } from './screens/home/home.screen';
 import { PlaceOrderScreen } from './screens/place-order/place-order.screen';
 import { PaymentScreen } from './screens/payment/payment.screen';
+import { WalletScreen } from './screens/wallet/wallet.screen';
+import { TicketScreen } from './screens/ticket/ticket.screen';
+
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
@@ -54,7 +57,7 @@ const routes: Routes = [
     component: MainMenuScreen,
     children:[
       {
-        path:'home',
+        path:'',
         component:HomeScreen
       },
       {
@@ -66,6 +69,15 @@ const routes: Routes = [
         path:'payment',
         component:PaymentScreen,
         canActivate:[ActiveOrderGuard]
+      },
+      {
+        path:'wallet',
+        component:WalletScreen
+      },
+      {
+        path:'tickets',
+        component:TicketScreen,
+        canActivate:[ActiveEventGuard]
       },
       {
         path:'hosts',
@@ -106,7 +118,7 @@ const routes: Routes = [
   },
   {
     path:"**",
-    redirectTo:"home"
+    redirectTo:""
   }
 ];
 

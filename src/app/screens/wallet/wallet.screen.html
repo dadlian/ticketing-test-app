@@ -1,0 +1,14 @@
+<h2>Events I'm Attending</h2>
+<div class='list'>
+  <div class='host' *ngFor="let event of events" (click)="selectEvent(event)">
+    <div class='event-details'>
+      <img src='{{event.thumbnail}}' />
+      <div>
+        <div class='name'>{{event.title}}</div>
+        <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
+        <div>{{event.venue.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class='host' *ngIf="events.length == 0">When you purchase or receive tickets they'll show up here</div>
+</div>

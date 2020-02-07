@@ -1,0 +1,11 @@
+<ng-container *ngFor="let section of event.sections">
+  <h2>{{section.name}}</h2>
+  <div class='list'>
+    <div class='host' *ngFor="let ticket of tickets[section.id]">
+      <div>
+        <div class='name'>{{ticket.serial}}</div>
+      </div>
+      <div class='balance'><a href='#'>Use Ticket</a></div>
+    </div>
+  </div>
+</ng-container>

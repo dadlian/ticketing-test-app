@@ -26,7 +26,7 @@ export class VerifyAccountScreen{
 
     this._sessionManager.getActiveSession().account.verify(this.verifyAccountForm.value.code).then((success: boolean) => {
       if(success){
-        this._router.navigate(["/home"]);
+        this._router.navigate(["/"]);
       }else{
         this.error = "Your account code not be verified with the provided code."
       }

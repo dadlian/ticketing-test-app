@@ -11,7 +11,7 @@ export class ActiveEventGuard implements CanActivate, CanActivateChild{
       if(this._eventManager.hasActiveEvent()){
         resolve(true)
       }else{
-        this._router.navigate(["/home"]);
+        this._router.navigate(["/"]);
         resolve(false)
       }
     })
