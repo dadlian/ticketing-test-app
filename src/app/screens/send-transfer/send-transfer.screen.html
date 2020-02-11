@@ -1,0 +1,21 @@
+<div class='event-details'>
+  <div class='details'>
+    <h2>{{event.title}}</h2>
+  </div>
+  <img src='{{event.banner}}' />
+</div>
+<div class='tickets'>
+  <h2>Select tickets to send</h2>
+  <div class='ticket' *ngFor="let section of event.sections">
+    <ng-container *ngIf="section.isActive() && ranges[section.id].length > 0">
+      <div class='details'>
+        <div class='name'>{{section.name}}</div>
+      </div>
+      <select (change)="updateTransfer(section)" [(ngModel)]="selection[section.id]">
+        <option *ngFor="let value of ranges[section.id]" value="{{value}}">{{value > 9?value:'0'+value}}</option>
+      </select>
+    </ng-container>
+  </div>
+  <div class='error'>{{error}}</div>
+  <div class='button' (click)="sendTransfer()">Send Transfer</div>
+</div>

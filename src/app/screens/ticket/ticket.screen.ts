@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Event, Account } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
@@ -13,7 +14,7 @@ export class TicketScreen{
   public event: Event;
   public tickets: any;
 
-  constructor(private _eventManager: EventManager, private _sessionManager: SessionManager){
+  constructor(private _eventManager: EventManager, private _sessionManager: SessionManager, private _router: Router){
     this.account = null;
     this.event = null;
     this.tickets = {};
@@ -28,5 +29,9 @@ export class TicketScreen{
         this.tickets[section.id] = tickets;
       });
     }
+  }
+
+  sendTransfer(){
+    this._router.navigate(["/transfer"]);
   }
 }
