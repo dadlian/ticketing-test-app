@@ -1,0 +1,23 @@
+<h2>Your Transfers</h2>
+<div class='filters'>
+  <div class='filter' (click)="filterTransfers('received')" [ngClass]="{'active':filter == 'received'}">Received</div>
+  <div class='filter' (click)="filterTransfers('sent')" [ngClass]="{'active':filter == 'sent'}">Sent</div>
+</div>
+<div class='list'>
+  <div class='host' *ngFor="let transfer of transfers" >
+    <div class='event-details'>
+      <img src='{{transfer.event.thumbnail}}' />
+      <div>
+        <div class='name'>{{transfer.event.title}}</div>
+        <div class='contact'>{{transfer.event.start | date:'dd MMMM, yyyy'}}</div>
+        <div>{{transfer.totalTickets()}} ticket(s)</div>
+        <div class='button-panel'>
+          <div *ngIf="filter == 'sent'" class='button cancel' (click)="cancelTransfer(transfer)">Cancel</div>
+          <div *ngIf="filter == 'received'" class='button cancel' (click)="cancelTransfer(transfer)">Decline</div>
+          <div *ngIf="filter == 'received'" class='button' (click)="claimTransfer(transfer)">Accept</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='message' *ngIf="transfers.length == 0">You have not {{filter}} any transfers waiting to be actioned.</div>
+</div>

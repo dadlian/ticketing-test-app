@@ -18,6 +18,7 @@ import { PaymentScreen } from './screens/payment/payment.screen';
 import { WalletScreen } from './screens/wallet/wallet.screen';
 import { TicketScreen } from './screens/ticket/ticket.screen';
 import { SendTransferScreen } from './screens/send-transfer/send-transfer.screen';
+import { TransferScreen } from './screens/transfer/transfer.screen';
 
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
@@ -84,6 +85,10 @@ const routes: Routes = [
         path:'transfer',
         component:SendTransferScreen,
         canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'list-transfers',
+        component:TransferScreen
       },
       {
         path:'hosts',
