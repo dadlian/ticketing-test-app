@@ -69,7 +69,7 @@ export class PaymentScreen{
       email:this.paymentForm.value.email,
       phone:this.paymentForm.value.phone
     }).then((result: boolean) => {
-      this._router.navigate(["/home"]);
+      this._router.navigate(["/tickets"]);
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:
