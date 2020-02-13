@@ -1,0 +1,6 @@
+<form [formGroup]="resetForm">
+  <h2>Reset your password</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="code" placeholder='Please enter your password reset code' />
+  <div class='button' (click)="reset()">Reset Password</div>
+</form>

@@ -17,8 +17,11 @@ import { ActiveOrderGuard } from './guards/active-order.guard';
 import { SessionManager } from './services/session.manager';
 import { EventManager } from './services/event.manager';
 import { OrderManager } from './services/order.manager';
+import { ResetManager } from './services/reset.manager';
 
 import { LoginScreen } from './screens/login/login.screen';
+import { RequestResetScreen } from './screens/request-reset/request-reset.screen';
+import { ConfirmResetScreen } from './screens/confirm-reset/confirm-reset.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
 import { VerifyAccountScreen } from './screens/verify-account/verify-account.screen';
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
@@ -43,6 +46,8 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
   declarations: [
     AppComponent,
     LoginScreen,
+    RequestResetScreen,
+    ConfirmResetScreen,
     CreateAccountScreen,
     VerifyAccountScreen,
     MainMenuScreen,
@@ -73,6 +78,7 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
     SessionManager,
     EventManager,
     OrderManager,
+    ResetManager,
     AuthorisedGuard,
     UnauthorisedGuard,
     VerifiedGuard,

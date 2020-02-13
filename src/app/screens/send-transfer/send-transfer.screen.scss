@@ -59,6 +59,28 @@
   }
 }
 
+.field{
+  display:flex;
+  align-items: center;
+  padding:5px;
+  width:100%;
+  margin:0px;
+  margin-bottom:10px;
+  border:solid 1px #BCBCBC;
+  background-color:#FFFFFF;
+
+  label{
+    width:150px;
+  }
+
+  input{
+    padding:5px 10px;
+    margin:0px;
+    border:0px;
+    width:100%
+  }
+}
+
 .error{
   color:#FF0000;
   margin:20px 0px;

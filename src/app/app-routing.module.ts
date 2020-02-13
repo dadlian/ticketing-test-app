@@ -9,6 +9,8 @@ import { ActiveEventGuard } from './guards/active-event.guard';
 import { ActiveOrderGuard } from './guards/active-order.guard';
 
 import { LoginScreen } from './screens/login/login.screen';
+import { RequestResetScreen } from './screens/request-reset/request-reset.screen';
+import { ConfirmResetScreen } from './screens/confirm-reset/confirm-reset.screen';
 import { CreateAccountScreen } from './screens/create-account/create-account.screen';
 import { VerifyAccountScreen } from './screens/verify-account/verify-account.screen';
 import { MainMenuScreen } from './screens/main-menu/main-menu.screen';
@@ -35,6 +37,16 @@ const routes: Routes = [
     path:"login",
     canActivate:[UnauthorisedGuard],
     component: LoginScreen
+  },
+  {
+    path:"request-reset",
+    canActivate:[UnauthorisedGuard],
+    component: RequestResetScreen
+  },
+  {
+    path:"confirm-reset",
+    canActivate:[UnauthorisedGuard],
+    component: ConfirmResetScreen
   },
   {
     path:"create-account",

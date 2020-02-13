@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event, Section, Transfer, INVALID_VALUES, INVALID_STATE } from '@ticketing/angular';
+import { TickeTing, Event, Section, Account, Transfer, INVALID_VALUES, INVALID_STATE, NOT_FOUND } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 import { EventManager } from '../../services/event.manager';
@@ -14,13 +14,19 @@ export class SendTransferScreen{
   public transfer: Transfer;
   public ranges: any;
   public selection: any;
+  public identification: string;
   public error: string;
 
-  constructor(private _sessionManager: SessionManager, private _eventManager: EventManager, private _router: Router){
+  private _recipient: Account;
+
+  constructor(private _ticketing: TickeTing, private _sessionManager: SessionManager, private _eventManager: EventManager, private _router: Router){
     this.event = null;
     this.ranges = {};
     this.selection = {};
+    this.identification = "";
     this.error = "";
+
+    this._recipient = null;
   }
 
   ngOnInit(){
@@ -43,20 +49,38 @@ export class SendTransferScreen{
     this.transfer.addItem(section,this.selection[section.id])
   }
 
-  sendTransfer(){
-    this.transfer.send({number: "AG-12D05DE4"}).then(result=>{
-      this._router.navigate(['/tickets']);
+  findUser(){
+    this._ticketing.account.findUser(this.identification).then(user => {
+      this._recipient = user;
+      this.error = "";
     }).catch((error: number) => {
+      this._recipient = null;
       switch(error){
-        case INVALID_STATE:
-          this.error = "The transfer cannot be sent as is.";
-          break;
-        case INVALID_VALUES:
-          this.error = "Your transfer could not be sent. Please review your selection."
+        case NOT_FOUND:
+          this.error = "The recipient could not be found."
           break;
         default:
           this.error = "The TickeTing server experienced an error. Please try again later."
       }
     })
+  }
+
+  sendTransfer(){
+    if(this._recipient){
+      this.transfer.send(this._recipient).then(result=>{
+        this._router.navigate(['/tickets']);
+      }).catch((error: number) => {
+        switch(error){
+          case INVALID_STATE:
+            this.error = "The transfer cannot be sent as is.";
+            break;
+          case INVALID_VALUES:
+            this.error = "Your transfer could not be sent. Please review your selection."
+            break;
+          default:
+            this.error = "The TickeTing server experienced an error. Please try again later."
+        }
+      })
+    }
   }
 }

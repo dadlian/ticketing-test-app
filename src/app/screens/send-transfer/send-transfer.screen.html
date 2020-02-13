@@ -16,6 +16,10 @@
       </select>
     </ng-container>
   </div>
+  <div class='field'>
+    <label>Recipient</label>
+    <input type='text' [(ngModel)]="identification" (keyup)="findUser()" placeholder='Please enter the user to transfer this ticket to' />
+  </div>
   <div class='error'>{{error}}</div>
   <div class='button' (click)="sendTransfer()">Send Transfer</div>
 </div>
