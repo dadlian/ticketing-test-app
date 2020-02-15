@@ -1,0 +1,9 @@
+<form [formGroup]="zoneForm">
+  <h2>Create an Advertising Zone</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter the zone name' />
+  <input type='text' formControlName="description" placeholder='Please enter the zone description' />
+  <input type='number' formControlName="width" placeholder='Please enter the zone width' />
+  <input type='number' formControlName="height" placeholder='Please enter the zone height' />
+  <div class='button' (click)="createZone()">Create Zone</div>
+</form>

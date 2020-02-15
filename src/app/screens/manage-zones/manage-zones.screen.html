@@ -1,0 +1,11 @@
+<h2>TickeTing Ad Zones</h2>
+<div class='list'>
+  <div class='host' *ngFor="let zone of zones">
+    <div>
+      <div class='name'>{{zone.name}}</div>
+      <div class='contact'>{{zone.width}}x{{zone.height}}px</div>
+    </div>
+    <div class='balance'>{{zone.number}}</div>
+  </div>
+  <div class='button' (click)="createZone()">Create Ad Zone</div>
+</div>
