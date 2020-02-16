@@ -59,6 +59,19 @@ h2{
     img{
       width:100%;
     }
+
+    .content{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .button{
+        width:100px;
+        height:20px;
+        margin:0px;
+        margin-right:25px;
+      }
+    }
   }
 
   h3{
@@ -86,6 +99,10 @@ h2{
   margin:0 auto;
   text-align: center;
   cursor:pointer;
+}
+
+.button.inactive{
+  background-color:#AAAAAA;
 }
 
 .showing{

@@ -19,3 +19,6 @@
     </div>
   </div>
 </div>
+<div class='ad' *ngIf="homeAd">
+  <img src='{{homeAd.artwork}}' width="{{homeBanner?.width}}" height="{{homeBanner?.height}}" (click)="selectEvent(homeAd?.event)"/>
+</div>

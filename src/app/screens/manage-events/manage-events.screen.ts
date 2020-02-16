@@ -42,4 +42,8 @@ export class ManageEventsScreen{
   filterContent(newFilter: string){
     this.filter = newFilter;
   }
+
+  submitAd(advertisement: Advertisement){
+    advertisement.submit()
+  }
 }

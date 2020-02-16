@@ -12,3 +12,6 @@
   </div>
   <div class='host' *ngIf="events.length == 0">When you purchase or receive tickets they'll show up here</div>
 </div>
+<div class='ad' *ngIf="walletAd">
+  <img src='{{walletAd.artwork}}' width="{{walletBanner?.width}}" height="{{walletBanner?.height}}" (click)="purchaseEvent(walletAd?.event)"/>
+</div>

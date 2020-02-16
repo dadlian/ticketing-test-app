@@ -28,10 +28,13 @@
   <div class='host' *ngFor="let advertisement of host?.advertisements | async">
     <div class='advertisement-details'>
       <img src='{{advertisement.artwork}}' />
-      <div>
-        <div class='name'>{{advertisement.name}}</div>
-        <div *ngFor="let timeslot of advertisement.schedule" class='contact'>{{timeslot.start | date:'dd MMMM, yyyy'}} to {{timeslot.end | date:'dd MMMM, yyyy'}}</div>
-        <div *ngFor="let zone of advertisement.zones">{{zone.name}}</div>
+      <div class='content'>
+        <div>
+          <div class='name'>{{advertisement.name}}</div>
+          <div *ngFor="let timeslot of advertisement.schedule" class='contact'>{{timeslot.start | date:'dd MMMM, yyyy'}} to {{timeslot.end | date:'dd MMMM, yyyy'}}</div>
+          <div *ngFor="let zone of advertisement.zones">{{zone.name}}</div>
+        </div>
+        <div class='button' [ngClass]="{inactive:advertisement.status !== 'Draft'}" (click)="submitAd(advertisement)">Submit</div>
       </div>
     </div>
   </div>

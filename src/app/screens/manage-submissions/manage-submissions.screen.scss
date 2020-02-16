@@ -2,6 +2,24 @@ h1{
   text-align: center;
 }
 
+.filters{
+  width:500px;
+  margin:10px auto;
+  display:flex;
+  justify-content: center;
+
+  .filter{
+    margin:10px;
+    cursor:pointer;
+    padding:5px;
+  }
+
+  .filter.active{
+    background-color:#2423AA;
+    color:#FFFFFF;
+  }
+}
+
 .message{
   text-align:center;
   font-size:18px;
@@ -29,11 +47,19 @@ table{
 .button{
   display:block;
   background-color:#0022AA;
-  width:300px;
+  width:100px;
   color:#FFFFFF;
   outline:none;
   border:0px;
   padding:10px;
   margin:20px auto;
   text-align:center;
+}
+
+.button.cancel{
+background-color:#AA2200;
+}
+
+.artwork{
+  width:200px;
 }

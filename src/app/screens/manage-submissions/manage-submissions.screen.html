@@ -1,6 +1,10 @@
 <h1>Manage Submissions</h1>
-<div class='message' *ngIf="submissions.length == 0">There are currently no submissions for your review</div>
-<table *ngIf="submissions.length > 0">
+<div class='filters'>
+  <div class='filter' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
+  <div class='filter' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
+</div>
+<div class='message' *ngIf="filter == 'events' && events.length == 0">There are currently no submissions for your review</div>
+<table *ngIf="filter == 'events' && events.length > 0">
   <tr>
     <th></th>
     <th>Title</th>
@@ -8,11 +12,30 @@
     <th>Date</th>
     <th></th>
   </tr>
-  <tr *ngFor="let submission of submissions">
-    <td><img src='{{submission.thumbnail}}' /></td>
-    <td>{{submission.title}}</td>
-    <td>{{submission.start | date:'dd MMMM, yyyy'}}</td>
-    <td>{{submission.venue.name}}</td>
-    <td><div class='button' (click)="publish(submission)">Publish</div></td>
+  <tr *ngFor="let event of events">
+    <td><img src='{{event.thumbnail}}' /></td>
+    <td>{{event.title}}</td>
+    <td>{{event.start | date:'dd MMMM, yyyy'}}</td>
+    <td>{{event.venue.name}}</td>
+    <td><div class='button' (click)="publishEvent(event)">Publish</div></td>
+  </tr>
+</table>
+<div class='message' *ngIf="filter == 'advertisements' && advertisements.length == 0">There are currently no submissions for your review</div>
+<table *ngIf="filter == 'advertisements' && advertisements.length > 0">
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Zones</th>
+    <th>Schedule</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let advertisement of advertisements">
+    <td><img class='artwork' src='{{advertisement.artwork}}' /></td>
+    <td>{{advertisement.name}}</td>
+    <td>{{getZones(advertisement)}}</td>
+    <td>{{advertisement.schedule[0].start | date:'dd MMMM, yyyy'}} to {{advertisement.schedule[0].end | date:'dd MMMM, yyyy'}}</td>
+    <td><div class='button' (click)="approveAdvertisement(advertisement)">Approve</div></td>
+    <td><div class='button cancel' (click)="denyAdvertisement(advertisement)">Deny</div></td>
   </tr>
 </table>
