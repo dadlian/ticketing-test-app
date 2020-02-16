@@ -1,5 +1,9 @@
-<h2>Manage Your Events</h2>
-<div class='list'>
+<h2>{{host?.name}}</h2>
+<div class='filters'>
+  <div class='filter' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
+  <div class='filter' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
+</div>
+<div class='list' *ngIf="filter == 'events'">
   <div class='host' *ngFor="let event of host?.events | async" (click)="selectEvent(event)">
     <div class='event-details'>
       <img src='{{event.thumbnail}}' />
@@ -19,4 +23,17 @@
     <a class='link' (click)="createShowing(event)">+ Add Showing</a>
   </div>
   <div class='button' [routerLink]="['/hosts',host?.name,'create-event']">Create Event</div>
+</div>
+<div class='list' *ngIf="filter == 'advertisements'">
+  <div class='host' *ngFor="let advertisement of host?.advertisements | async">
+    <div class='advertisement-details'>
+      <img src='{{advertisement.artwork}}' />
+      <div>
+        <div class='name'>{{advertisement.name}}</div>
+        <div *ngFor="let timeslot of advertisement.schedule" class='contact'>{{timeslot.start | date:'dd MMMM, yyyy'}} to {{timeslot.end | date:'dd MMMM, yyyy'}}</div>
+        <div *ngFor="let zone of advertisement.zones">{{zone.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class='button' [routerLink]="['/hosts',host?.name,'create-advertisement']">Create Advertisement</div>
 </div>

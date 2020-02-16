@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Event, Host, TickeTing } from '@ticketing/angular';
+import { Event, Advertisement, Host, TickeTing } from '@ticketing/angular';
 import { SessionManager } from '../../services/session.manager';
 import { EventManager } from '../../services/event.manager';
 
@@ -10,10 +10,12 @@ import { EventManager } from '../../services/event.manager';
 })
 export class ManageEventsScreen{
   public host: Host;
+  public filter: string;
 
   constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _router: Router,
               private _sessionManager: SessionManager, private _eventManager: EventManager){
     this.host = null;
+    this.filter = "events";
   }
 
   ngOnInit(){
@@ -35,5 +37,9 @@ export class ManageEventsScreen{
   selectEvent(event: Event){
     this._eventManager.setActiveEvent(event)
     this._router.navigate(["/events/detail"]);
+  }
+
+  filterContent(newFilter: string){
+    this.filter = newFilter;
   }
 }

@@ -32,6 +32,7 @@ import { CreateSectionScreen } from './screens/create-section/create-section.scr
 import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
+import { CreateAdvertisementScreen } from './screens/create-advertisement/create-advertisement.screen';
 
 
 const routes: Routes = [
@@ -123,6 +124,10 @@ const routes: Routes = [
       {
         path:'hosts/:host/create-event',
         component:CreateEventScreen
+      },
+      {
+        path:'hosts/:host/create-advertisement',
+        component:CreateAdvertisementScreen
       },
       {
         path:'events/create-showing',

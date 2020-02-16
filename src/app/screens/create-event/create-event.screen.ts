@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TickeTing, Host, Event, INVALID_VALUES, NOT_UNIQUE } from '@ticketing/angular';
+import { TickeTing, Host, Event, INVALID_VALUES } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 
