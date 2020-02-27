@@ -1,6 +1,8 @@
 <form [formGroup]="verifyAccountForm">
   <h2>Please Verify Your Account</h2>
-  <div class='error'>{{error}}</div>
+  <div class='error' *ngIf="error">{{error}}</div>
+  <div class='success' *ngIf="message">{{message}}</div>
   <input type='text' formControlName="code" placeholder='Please enter your verification code' />
   <div class='button' (click)="verifyAccount()">Verify</div>
+  <a (click)="resendVerification()">Resend Verification</a>
 </form>
