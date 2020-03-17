@@ -7,6 +7,11 @@
   <div class='description'>{{event.description}}</div>
 </div>
 <div class='tickets'>
+  <h2>Venue</h2>
+  <div>{{event.venue.name}}</div>
+  <img width="600" height="300" [src]="event.venue.map" alt="event venue" />
+</div>
+<div class='tickets'>
   <h2>Tickets</h2>
   <div class='ticket' *ngFor="let section of event.sections">
     <ng-container *ngIf="section.isActive()">
