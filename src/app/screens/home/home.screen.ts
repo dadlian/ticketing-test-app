@@ -26,7 +26,7 @@ export class HomeScreen{
   ngOnInit(){
     this._loadEvents();
 
-    this._ticketing.advertisement.findZone("HD4015").then(zone => {
+    this._ticketing.advertisement.findZone("HR7870").then(zone => {
       if(zone){
         this.homeBanner = zone;
         zone.getRandomAds(1).then(advertisements => {

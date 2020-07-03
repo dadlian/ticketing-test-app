@@ -69,7 +69,11 @@ export class PaymentScreen{
       email:this.paymentForm.value.email,
       phone:this.paymentForm.value.phone
     }).then((result: boolean) => {
-      this._router.navigate(["/tickets"]);
+      if(result){
+        this._router.navigate(["/tickets"]);
+      }else{
+        this.error = "Your payment failed. Please check your details and try again.";
+      }
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:

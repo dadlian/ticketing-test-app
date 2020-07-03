@@ -78,7 +78,7 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    TickeTingModule
+    TickeTingModule.forRoot({production: false})
   ],
   providers: [
     SessionManager,
