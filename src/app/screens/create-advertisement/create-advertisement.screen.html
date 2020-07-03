@@ -8,7 +8,7 @@
     <option *ngFor="let event of events; let i = index" [value]="i">{{event.title}}</option>
   </select>
   <div formArrayName="zones"
-        *ngFor="let zone of advertisementForm.get('zones').controls; let i = index;">
+        *ngFor="let zone of advertisementForm.get('zones'); let i = index;">
     <select [formControlName]="i">
       <option value="">Please select an ad zone</option>
       <option *ngFor="let zone of zones" value="{{zone.number}}">{{zone.name}}</option>
@@ -16,7 +16,7 @@
   </div>
   <a (click)="addZone()">+ Add Zone</a>
   <div formArrayName="schedule" class='timezone'
-        *ngFor="let timeslot of advertisementForm.get('schedule').controls; let i = index;">
+        *ngFor="let timeslot of advertisementForm.get('schedule'); let i = index;">
     <div [formGroupName]="i">
       <div class='date'>
         <label>Event Start</label>
