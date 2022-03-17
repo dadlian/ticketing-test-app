@@ -6,7 +6,7 @@ import { TickeTingModule } from '@ticketing/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { environment } from '../environments/environment'
 import { AuthorisedGuard } from './guards/authorised.guard';
 import { UnauthorisedGuard } from './guards/unauthorised.guard';
 import { VerifiedGuard } from './guards/verified.guard';
@@ -78,7 +78,7 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    TickeTingModule.forRoot({production: false})
+    TickeTingModule.forRoot({environment: environment.name}),
   ],
   providers: [
     SessionManager,

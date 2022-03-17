@@ -55,20 +55,20 @@ export class PaymentScreen{
   payForOrder(){
     this.error = "";
 
-    this.order.pay({
+    let details: any = {
       cardholder: this.paymentForm.value.cardholder,
       number: this.paymentForm.value.number,
       cvv: this.paymentForm.value.cvv,
       expiryDate: this.paymentForm.value.expiryDate,
       address1: this.paymentForm.value.address1,
-      address2: this.paymentForm.value.address2,
-      city: this.paymentForm.value.city,
-      district: this.paymentForm.value.district,
-      zip: this.paymentForm.value.zip,
+      city: "N/A",
+      district: "N/A",
       country: this.paymentForm.value.country,
       email:this.paymentForm.value.email,
       phone:this.paymentForm.value.phone
-    }).then((result: boolean) => {
+    }
+
+    this.order.pay(details).then((result: boolean) => {
       if(result){
         this._router.navigate(["/tickets"]);
       }else{
