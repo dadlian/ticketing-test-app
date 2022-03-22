@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TickeTing, Host, Event, INVALID_VALUES } from '@ticketing/angular';
+import { TickeTing, Host, Event, Venue, INVALID_VALUES } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 
@@ -13,6 +13,7 @@ export class CreateEventScreen{
   public host: Host;
   public error: string;
   public eventForm: FormGroup;
+  public venues: Array<Venue>;
 
   private _banner: string;
   private _thumbnail: string;
@@ -47,6 +48,10 @@ export class CreateEventScreen{
         }
       }
     })
+
+    this._ticketing.venue.list().then(venues => {
+      this.venues = venues
+    })
   }
 
   createEvent(){
@@ -58,7 +63,7 @@ export class CreateEventScreen{
       description: this.eventForm.value.description,
       category: this.eventForm.value.category,
       subcategory: this.eventForm.value.subcategory,
-      venue: {name: this.eventForm.value.venue},
+      venue: this.eventForm.value.venue,
       start: this.eventForm.value.start.replace("T"," "),
       end: this.eventForm.value.end.replace("T"," "),
       public: this.eventForm.value.public?true:false,

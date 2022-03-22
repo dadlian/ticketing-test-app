@@ -1,0 +1,11 @@
+<h2>Event Venues</h2>
+<div class='list'>
+  <div class='host' *ngFor="let venue of venues" (click)="modifyVenue(venue.self)">
+    <div>
+      <div class='name'>{{venue.name}}</div>
+      <div class='contact'>{{venue.address}}</div>
+    </div>
+    <div class='balance'>({{venue.latitude}},{{venue.longitude}})</div>
+  </div>
+  <div class='button' (click)="addVenue()">Add Venue</div>
+</div>

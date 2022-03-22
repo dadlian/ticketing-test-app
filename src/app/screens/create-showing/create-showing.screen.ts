@@ -45,7 +45,7 @@ export class CreateShowingScreen{
       description: this.showingForm.value.description,
       category: this.showingForm.value.category,
       subcategory: this.showingForm.value.subcategory,
-      venue: {name: this.showingForm.value.venue},
+      venue: {self: "", name: this.showingForm.value.venue, address: ""},
       start: this.showingForm.value.start.replace("T"," "),
       end: this.showingForm.value.end.replace("T"," "),
       public: this.showingForm.value.public?true:false,

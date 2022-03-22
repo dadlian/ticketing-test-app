@@ -29,6 +29,9 @@ import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ManageVenuesScreen } from './screens/manage-venues/manage-venues.screen';
+import { CreateVenueScreen } from './screens/create-venue/create-venue.screen';
+import { ModifyVenueScreen } from './screens/modify-venue/modify-venue.screen';
 import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
@@ -143,6 +146,18 @@ const routes: Routes = [
         path:'events/create-section',
         component:CreateSectionScreen,
         canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'venues',
+        component:ManageVenuesScreen
+      },
+      {
+        path:'create-venue',
+        component:CreateVenueScreen
+      },
+      {
+        path:'modify-venue/:venue',
+        component:ModifyVenueScreen
       },
       {
         path:'zones',

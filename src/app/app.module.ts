@@ -40,6 +40,9 @@ import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ManageVenuesScreen } from './screens/manage-venues/manage-venues.screen';
+import { CreateVenueScreen } from './screens/create-venue/create-venue.screen';
+import { ModifyVenueScreen } from './screens/modify-venue/modify-venue.screen';
 import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
@@ -68,6 +71,9 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
     CreateShowingScreen,
     EventDetailScreen,
     CreateSectionScreen,
+    ManageVenuesScreen,
+    CreateVenueScreen,
+    ModifyVenueScreen,
     ManageSubmissionsScreen,
     ManageZonesScreen,
     CreateZoneScreen,

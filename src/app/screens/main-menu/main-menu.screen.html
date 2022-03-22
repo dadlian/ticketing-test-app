@@ -4,6 +4,7 @@
     <div [routerLink]="['/wallet']">Wallet</div>
     <div [routerLink]="['/list-transfers']">Transfers</div>
     <div [routerLink]="['/hosts']">Hosts</div>
+    <div *ngIf="account?.role == 'administrator'" [routerLink]="['/venues']">Venues</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/zones']">Zones</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/submissions']">Submissions</div>
   </div>

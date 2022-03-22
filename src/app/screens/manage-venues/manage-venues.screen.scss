@@ -1,0 +1,38 @@
+h2{
+  text-align:center;
+}
+
+.host{
+  cursor:pointer;
+  width:600px;
+  display: flex;
+  justify-content: space-between;
+  margin:10px auto;
+  border:solid 1px #888888;
+  border-radius:5px;
+  padding:10px;
+  align-items: center;
+  font-family: sans-serif;
+
+  .name{
+    font-weight:bold;
+    font-size:20px;
+  }
+
+  .balance{
+    font-size:25px;
+  }
+}
+
+.button{
+  display:block;
+  background-color:#0022AA;
+  width:300px;
+  color:#FFFFFF;
+  outline:none;
+  border:0px;
+  padding:10px;
+  margin:0 auto;
+  text-align: center;
+  cursor:pointer;
+}

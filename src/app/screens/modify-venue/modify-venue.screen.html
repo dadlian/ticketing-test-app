@@ -1,0 +1,10 @@
+<form [formGroup]="venueForm">
+  <h2>Manage Venue</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter the venue name' />
+  <input type='text' formControlName="address" placeholder='Please enter the venue address' />
+  <input type='number' formControlName="latitude" placeholder='Please enter the venue latitude' />
+  <input type='number' formControlName="longitude" placeholder='Please enter the venue longitude' />
+  <div class='button' (click)="saveVenue()">Save</div>
+  <div class='button delete' (click)="deleteVenue()">Delete</div>
+</form>
