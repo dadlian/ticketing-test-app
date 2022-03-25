@@ -1,0 +1,16 @@
+<form [formGroup]="categoryForm">
+  <h2>Manage Category</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter the category name' />
+
+  <h3>Subcategories</h3>
+  <div class='subcategory' *ngFor="let subcategory of subcategories; let i = index">
+    <input type='text' placeholder='Please add a subcategory'
+          (change)='subcategories[i]=$event.target.value' [value]="subcategories[i]" />
+    <div class='remove' (click)="removeSubcategory(i)">x</div>
+  </div>
+  <div class='add' (click)="addSubcategory()">+ Add Subcategory</div>
+
+  <div class='button' (click)="saveCategory()">Save</div>
+  <div class='button delete' (click)="deleteCategory()">Delete</div>
+</form>

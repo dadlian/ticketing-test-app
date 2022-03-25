@@ -25,7 +25,7 @@ export class CreateVenueScreen{
   createVenue(){
     this.error = "";
 
-    this._ticketing.venue.create({
+    this._ticketing.event.venue.create({
       name: this.venueForm.value.name,
       address: this.venueForm.value.address,
       latitude: this.venueForm.value.latitude,

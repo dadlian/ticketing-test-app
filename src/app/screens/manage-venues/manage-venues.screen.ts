@@ -14,7 +14,7 @@ export class ManageVenuesScreen{
   }
 
   ngOnInit(){
-    this._ticketing.venue.list().then(venues => {
+    this._ticketing.event.venue.list().then(venues => {
       for(let venue of venues){
         this.venues.push(venue);
       }

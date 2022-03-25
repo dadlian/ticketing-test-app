@@ -8,8 +8,14 @@
   </select>
   <input type='text' formControlName="title" placeholder='Please enter an event title' />
   <textarea type='text' formControlName="description" placeholder='Please enter an event description'></textarea>
-  <input type='text' formControlName="category" placeholder='Please enter an event category' />
-  <input type='text' formControlName="subcategory" placeholder='Please enter an event subcategory' />
+  <select formControlName="category">
+    <option value="">Please select an event category</option>
+    <option *ngFor="let category of categories" value="{{category.self}}">{{category.name}}</option>
+  </select>
+  <select formControlName="subcategory">
+    <option value="">Please select an event subcategory</option>
+    <option *ngFor="let subcategory of subcategories[eventForm.value.category]">{{subcategory}}</option>
+  </select>
   <select formControlName="venue">
     <option value="">Please select an event venue</option>
     <option *ngFor="let venue of venues" value="{{venue.self}}">{{venue.name}}</option>

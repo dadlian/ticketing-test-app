@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { TickeTing, Host, Event, Venue, INVALID_VALUES } from '@ticketing/angular';
+import { TickeTing, Host, Event, Venue, Category, INVALID_VALUES } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 
@@ -14,15 +14,19 @@ export class CreateEventScreen{
   public error: string;
   public eventForm: FormGroup;
   public venues: Array<Venue>;
+  public categories: Array<Category>;
+  public subcategories: {[key: string]: Array<string>}
 
   private _banner: string;
   private _thumbnail: string;
 
-  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _router: Router, private _sessionManager: SessionManager){
+  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing,
+              private _router: Router, private _sessionManager: SessionManager){
     this.host = null;
     this.error = "";
     this._banner = "";
     this._thumbnail = "";
+    this.subcategories = {"": []}
 
     this.eventForm = new FormGroup({
       type: new FormControl(""),
@@ -49,8 +53,15 @@ export class CreateEventScreen{
       }
     })
 
-    this._ticketing.venue.list().then(venues => {
+    this._ticketing.event.venue.list().then(venues => {
       this.venues = venues
+    })
+
+    this._ticketing.event.category.list().then(categories => {
+      this.categories = categories
+      for(let category of this.categories){
+        this.subcategories[category.self] = category.subcategories
+      }
     })
   }
 

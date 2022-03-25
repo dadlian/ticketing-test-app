@@ -1,0 +1,9 @@
+<h2>Event Category</h2>
+<div class='list'>
+  <div class='host' *ngFor="let category of categories" (click)="modifyCategory(category.self)">
+    <div>
+      <div class='name'>{{category.name}}</div>
+    </div>
+  </div>
+  <div class='button' (click)="addCategory()">Add Category</div>
+</div>

@@ -32,6 +32,9 @@ import { CreateSectionScreen } from './screens/create-section/create-section.scr
 import { ManageVenuesScreen } from './screens/manage-venues/manage-venues.screen';
 import { CreateVenueScreen } from './screens/create-venue/create-venue.screen';
 import { ModifyVenueScreen } from './screens/modify-venue/modify-venue.screen';
+import { ManageCategoriesScreen } from './screens/manage-categories/manage-categories.screen';
+import { CreateCategoryScreen } from './screens/create-category/create-category.screen';
+import { ModifyCategoryScreen } from './screens/modify-category/modify-category.screen';
 import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
@@ -158,6 +161,18 @@ const routes: Routes = [
       {
         path:'modify-venue/:venue',
         component:ModifyVenueScreen
+      },
+      {
+        path:'categories',
+        component:ManageCategoriesScreen
+      },
+      {
+        path:'create-category',
+        component:CreateCategoryScreen
+      },
+      {
+        path:'modify-category/:category',
+        component:ModifyCategoryScreen
       },
       {
         path:'zones',
