@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { TickeTing, Host, Zone, Event, Advertisement, INVALID_VALUES } from '@ticketing/angular';
 
+import { EventManager } from '../../services/event.manager';
 import { SessionManager } from '../../services/session.manager';
 
 @Component({
@@ -11,16 +12,16 @@ import { SessionManager } from '../../services/session.manager';
 })
 export class CreateAdvertisementScreen{
   public error: string;
-  public host: Host;
   public advertisementForm: FormGroup;
   public zones: Array<Zone>;
   public events: Array<Event>;
 
   private _artwork: string;
 
-  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _router: Router, private _sessionManager: SessionManager){
+  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing,
+              private _router: Router, private _sessionManager: SessionManager,
+              private _eventManager: EventManager){
     this.error = "";
-    this.host = null;
     this.zones = [];
     this.events = [];
     this._artwork = "";
@@ -35,16 +36,8 @@ export class CreateAdvertisementScreen{
   }
 
   ngOnInit(){
-    this._ticketing.host.list(this._sessionManager.getActiveSession().account).then(hosts => {
-      for(let host of hosts){
-        if(host.name == this._activatedRoute.snapshot.params.host){
-          this.host = host;
-          this.host.events.then(events => {
-            this.events = events;
-          })
-          break;
-        }
-      }
+    this._eventManager.getActiveHost().events.then(events => {
+      this.events = events;
     })
 
     this._ticketing.advertisement.listZones().then(zones => {
@@ -71,8 +64,9 @@ export class CreateAdvertisementScreen{
       })
     }
 
-    this.host.createAdvertisement(payload).then((advertisement: Advertisement) => {
-      this._router.navigate(["/hosts/"+this.host.name]);
+    let host = this._eventManager.getActiveHost()
+    host.createAdvertisement(payload).then((advertisement: Advertisement) => {
+      this._router.navigate(["/hosts/"+name]);
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:

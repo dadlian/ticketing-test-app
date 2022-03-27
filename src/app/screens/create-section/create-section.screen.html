@@ -19,42 +19,5 @@
     <input type='datetime-local' formControlName="salesEnd" />
   </div>
   <textarea type='text' formControlName="description" placeholder='Please enter a section description'></textarea>
-  <div class='modifiers'>
-    <h3>Modifiers</h3>
-    <ul *ngIf="modifiers.length > 0">
-      <li *ngFor="let modifier of modifiers; let i = index" class='modifier'>
-        <div class='title'>{{modifier.name}}</div>
-        <div class='details'>
-          <span>{{modifier.priceDelta | currency}}</span>
-          <span>{{modifier.availableFrom | date:'dd MMMM, yyyy hh:mm'}} to {{modifier.availableTo | date:'dd MMMM, yyyy hh:mm'}}</span>
-          <a (click)="deleteModifier(i)">[X]</a>
-        </div>
-      </li>
-    </ul>
-    <a (click)="showModifierForm()">+ Add Modifier</a>
-  </div>
   <div class='button' (click)="createSection()">Add Section</div>
 </form>
-<div class='overlay' [ngClass]="{hidden:!modifierFormShown}">
-  <form [formGroup]="modifierForm">
-    <h2>Add a section modifier</h2>
-    <input type='text' formControlName="name" placeholder='Please enter a modifier name (Early Bird, Gate Price, etc.)' />
-    <div class='date'>
-      <label>Price Delta</label>
-      <input type='number' formControlName="priceDelta" />
-    </div>
-    <div class='date'>
-      <label>Quantity</label>
-      <input type='number' formControlName="quantity" />
-    </div>
-    <div class='date'>
-      <label>Available From</label>
-      <input type='datetime-local' formControlName="availableFrom" />
-    </div>
-    <div class='date'>
-      <label>Available To</label>
-      <input type='datetime-local' formControlName="availableTo" />
-    </div>
-    <div class='button' (click)="addModifier()">Add Modifier</div>
-  </form>
-</div>

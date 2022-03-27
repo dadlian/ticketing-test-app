@@ -24,18 +24,26 @@ import { TransferScreen } from './screens/transfer/transfer.screen';
 
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
+
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
+import { ModifyEventScreen } from './screens/modify-event/modify-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
+
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ModifySectionScreen } from './screens/modify-section/modify-section.screen';
+
 import { ManageVenuesScreen } from './screens/manage-venues/manage-venues.screen';
 import { CreateVenueScreen } from './screens/create-venue/create-venue.screen';
 import { ModifyVenueScreen } from './screens/modify-venue/modify-venue.screen';
+
 import { ManageCategoriesScreen } from './screens/manage-categories/manage-categories.screen';
 import { CreateCategoryScreen } from './screens/create-category/create-category.screen';
 import { ModifyCategoryScreen } from './screens/modify-category/modify-category.screen';
+
 import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-submissions.screen';
+
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
 import { CreateAdvertisementScreen } from './screens/create-advertisement/create-advertisement.screen';
@@ -141,13 +149,23 @@ const routes: Routes = [
         canActivate:[ActiveEventGuard]
       },
       {
-        path:'events/detail',
+        path:'events/create-section',
+        component:CreateSectionScreen,
+        canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'events/:event',
         component:EventDetailScreen,
         canActivate:[ActiveEventGuard]
       },
       {
-        path:'events/create-section',
-        component:CreateSectionScreen,
+        path:'events/:event/edit',
+        component:ModifyEventScreen,
+        canActivate:[ActiveEventGuard]
+      },
+      {
+        path:'events/:event/sections/:section',
+        component:ModifySectionScreen,
         canActivate:[ActiveEventGuard]
       },
       {

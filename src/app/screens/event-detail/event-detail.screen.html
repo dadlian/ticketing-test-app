@@ -1,17 +1,23 @@
 <div class='event-details'>
   <a (click)="goBack()" class="back">&laquo;Back</a>
-  <img src='{{event.banner}}' />
+  <img src='{{event?.banner+"?"+timestamp}}' />
   <div class='event-row'>
     <div class='details'>
-      <h2>{{event.title}}</h2>
-      <div>{{event.start | date:'dd MMMM, yyyy'}}</div>
-      <div>{{event.venue.name}}</div>
+      <h2>{{event?.title}}</h2>
+      <div>{{event?.start | date:'dd MMMM, yyyy'}}</div>
+      <div>{{event?.venue.name}}</div>
     </div>
-    <div class='button submit' [ngClass]="{inactive:event.status !== 'Draft'}" (click)="submitEvent()">Submit Event</div>
+  </div>
+  <div class='event-row'>
+    <div class='button' (click)="editEvent()">Edit Event</div>
+    <div class='button submit' [ngClass]="{inactive:event?.status !== 'Draft'}" (click)="submitEvent()">Submit Event</div>
+  </div>
+  <div class='event-row'>
+    <div class='error'>{{error}}</div>
   </div>
   <div class='sections'>
     <h2>Sections</h2>
-    <div class='section' *ngFor="let section of event.sections">
+    <div class='section' *ngFor="let section of event?.sections" (click)="modifySection(section)">
       <div class='details'>
         <div>{{section.name}}</div>
         <div>From {{section.salesStart | date:'dd MMMM, yyyy'}}</div>

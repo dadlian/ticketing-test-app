@@ -11,6 +11,7 @@ import { EventManager } from '../../services/event.manager';
 export class ManageEventsScreen{
   public host: Host;
   public filter: string;
+  public timestamp: number;
 
   constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing, private _router: Router,
               private _sessionManager: SessionManager, private _eventManager: EventManager){
@@ -23,6 +24,8 @@ export class ManageEventsScreen{
       for(let host of hosts){
         if(host.name == this._activatedRoute.snapshot.params.host){
           this.host = host;
+          this._eventManager.setActiveHost(host)
+          this.timestamp = Date.now()
           break;
         }
       }
@@ -36,7 +39,7 @@ export class ManageEventsScreen{
 
   selectEvent(event: Event){
     this._eventManager.setActiveEvent(event)
-    this._router.navigate(["/events/detail"]);
+    this._router.navigate([`/events/${btoa(event.self)}`]);
   }
 
   filterContent(newFilter: string){

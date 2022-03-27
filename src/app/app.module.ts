@@ -37,9 +37,11 @@ import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
+import { ModifyEventScreen } from './screens/modify-event/modify-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
 import { EventDetailScreen } from './screens/event-detail/event-detail.screen';
 import { CreateSectionScreen } from './screens/create-section/create-section.screen';
+import { ModifySectionScreen } from './screens/modify-section/modify-section.screen';
 import { ManageVenuesScreen } from './screens/manage-venues/manage-venues.screen';
 import { CreateVenueScreen } from './screens/create-venue/create-venue.screen';
 import { ModifyVenueScreen } from './screens/modify-venue/modify-venue.screen';
@@ -71,9 +73,11 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
     CreateHostScreen,
     ManageEventsScreen,
     CreateEventScreen,
+    ModifyEventScreen,
     CreateShowingScreen,
     EventDetailScreen,
     CreateSectionScreen,
+    ModifySectionScreen,
     ManageVenuesScreen,
     CreateVenueScreen,
     ModifyVenueScreen,

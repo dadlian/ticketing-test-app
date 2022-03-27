@@ -1,0 +1,47 @@
+<form [formGroup]="eventForm">
+  <h2>Manage Event</h2>
+  <div class='error'>{{error}}</div>
+  <select formControlName="type">
+    <option value="">Please select your event type</option>
+    <option>Standard</option>
+    <option>Registration</option>
+  </select>
+  <input type='text' formControlName="title" placeholder='Please enter an event title' />
+  <textarea type='text' formControlName="description" placeholder='Please enter an event description'></textarea>
+  <select formControlName="category">
+    <option value="">Please select an event category</option>
+    <option *ngFor="let category of categories" value="{{category.self}}">{{category.name}}</option>
+  </select>
+  <select formControlName="subcategory">
+    <option value="">Please select an event subcategory</option>
+    <option *ngFor="let subcategory of subcategories[eventForm.value.category]" value="{{subcategory}}">{{subcategory}}</option>
+  </select>
+  <select formControlName="venue">
+    <option value="">Please select an event venue</option>
+    <option *ngFor="let venue of venues" value="{{venue.self}}">{{venue.name}}</option>
+  </select>
+  <div class='date'>
+    <label>Event Start</label>
+    <input type='datetime-local' formControlName="start" />
+  </div>
+  <div class='date'>
+    <label>Event End</label>
+    <input type='datetime-local' formControlName="end" placeholder='Please enter the event end time' />
+  </div>
+  <div class='checkbox'>
+    <label>Public</label>
+    <input type='checkbox' formControlName="public" />
+  </div>
+  <div class='file'>
+    <label>Banner</label>
+    <input type='file' (change)="cacheBanner($event)" />
+  </div>
+  <div class='file'>
+    <label>Thumbnail</label>
+    <input type='file' (change)="cacheThumbnail($event)" />
+  </div>
+  <textarea type='text' formControlName="disclaimer" placeholder='Please enter the event disclaimer'></textarea>
+  <input type='text' formControlName="tags" placeholder='Please enter comma separated event tags list' />
+  <div class='button' (click)="saveEvent()">Save</div>
+  <div class='button delete' (click)="deleteEvent()">Delete</div>
+</form>

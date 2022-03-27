@@ -1,0 +1,56 @@
+<form [formGroup]="sectionForm">
+  <h2>Manage Section</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter a section name (General, VIP, etc.)' />
+  <div class='date'>
+    <label>Capacity</label>
+    <input type='number' formControlName="capacity" />
+  </div>
+  <div class='date'>
+    <label>Base Price</label>
+    <input type='number' formControlName="basePrice" />
+  </div>
+  <div class='date'>
+    <label>Sales Start</label>
+    <input type='datetime-local' formControlName="salesStart" />
+  </div>
+  <div class='date'>
+    <label>Sales End</label>
+    <input type='datetime-local' formControlName="salesEnd" />
+  </div>
+  <textarea type='text' formControlName="description" placeholder='Please enter a section description'></textarea>
+  <div class='modifiers'>
+    <h3>Modifiers</h3>
+    <div class='modifier' *ngFor="let modifier of modifiers" (click)="showModifierForm(modifier)">
+      <div class='details'>
+        <div>{{modifier.name}}</div>
+        <div>From {{modifier.availableFrom | date:'dd MMMM, yyyy'}} to {{modifier.availableTo | date:'dd MMMM, yyyy hh:mm'}}</div>
+        <div>{{modifier.priceDelta | currency}}</div>
+      </div>
+    </div>
+    <a (click)="showModifierForm(null)">+ Add Modifier</a>
+  </div>
+  <div class='button' (click)="saveSection()">Save</div>
+  <div class='button delete' (click)="deleteSection()">Delete</div>
+</form>
+<div class='overlay' [ngClass]="{hidden:!modifierFormShown}">
+  <form [formGroup]="modifierForm">
+    <h2>Add a section modifier</h2>
+    <div class='error'>{{modifierError}}</div>
+    <input type='text' formControlName="name" placeholder='Please enter a modifier name (Early Bird, Gate Price, etc.)' />
+    <div class='date'>
+      <label>Price Delta</label>
+      <input type='number' formControlName="priceDelta" />
+    </div>
+    <div class='date'>
+      <label>Available From</label>
+      <input type='datetime-local' formControlName="availableFrom" />
+    </div>
+    <div class='date'>
+      <label>Available To</label>
+      <input type='datetime-local' formControlName="availableTo" />
+    </div>
+    <div class='button' (click)="saveModifier()">Save</div>
+    <div *ngIf='activeModifier' class='button delete' (click)="deleteModifier()">Delete</div>
+  </form>
+</div>
