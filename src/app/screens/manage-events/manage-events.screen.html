@@ -25,7 +25,7 @@
   <div class='button' [routerLink]="['/hosts',host?.name,'create-event']">Create Event</div>
 </div>
 <div class='list' *ngIf="filter == 'advertisements'">
-  <div class='host' *ngFor="let advertisement of host?.advertisements | async">
+  <div class='host' *ngFor="let advertisement of host?.advertisements | async" (click)="selectAdvertisement(advertisement)">
     <div class='advertisement-details'>
       <img src='{{advertisement.artwork}}' />
       <div class='content'>

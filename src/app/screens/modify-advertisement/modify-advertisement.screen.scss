@@ -1,0 +1,82 @@
+*{
+  box-sizing: border-box;
+}
+
+.error{
+  color:#FF0000;
+  margin:20px 0px;
+  font-weight: bold;
+}
+
+.success{
+  color:#22DD22;
+  margin:20px 0px;
+  font-weight: bold;
+}
+
+form{
+  text-align:center;
+  width:300px;
+  margin:0 auto;
+
+  input,select{
+    display:block;
+    padding:5px;
+    width:300px;
+    margin:0px;
+    margin-bottom:10px;
+    border:solid 1px #BCBCBC;
+    background-color:#FFFFFF;
+  }
+
+  textarea{
+    width:300px;
+    height:75px;
+    resize: none;
+  }
+
+  a{
+    display:block;
+    text-align:left;
+    color:#0122AA;
+    margin:10px 0px;
+    cursor: pointer;
+  }
+
+  .checkbox,.file,.date{
+    display:flex;
+    align-items: center;
+    padding:5px;
+    width:300px;
+    margin:0px;
+    margin-bottom:10px;
+    border:solid 1px #BCBCBC;
+    background-color:#FFFFFF;
+
+    input{
+      padding:0px;
+      margin:0px;
+      border:0px;
+      width:175px;
+    }
+  }
+
+  .file,.date{
+    justify-content: space-between;
+  }
+
+  .button{
+    display:block;
+    background-color:#0022AA;
+    width:300px;
+    color:#FFFFFF;
+    outline:none;
+    border:0px;
+    padding:10px;
+    margin-bottom: 10px;
+  }
+
+  .button.delete{
+    background-color: #FF2222;
+  }
+}

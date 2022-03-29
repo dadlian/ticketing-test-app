@@ -1,0 +1,38 @@
+<form [formGroup]="advertisementForm">
+  <h2>Manage Advertisement</h2>
+  <div class='error'>{{error}}</div>
+  <input type='text' formControlName="name" placeholder='Please enter an ad name' />
+  <textarea type='text' formControlName="description" placeholder='Please enter an ad description'></textarea>
+  <select formControlName="event">
+    <option [value]="null">Please select an event (optional)</option>
+    <option *ngFor="let event of events; let i = index" [value]="i">{{event.title}}</option>
+  </select>
+  <div formArrayName="zones"
+        *ngFor="let zone of advertisementForm.get('zones').value; let i = index;">
+    <select [formControlName]="i">
+      <option value="">Please select an ad zone</option>
+      <option *ngFor="let zone of zones" value="{{zone.number}}">{{zone.name}}</option>
+    </select>
+  </div>
+  <a (click)="addZone()">+ Add Zone</a>
+  <div formArrayName="schedule" class='timezone'
+        *ngFor="let timeslot of advertisementForm.get('schedule').value; let i = index;">
+    <div [formGroupName]="i">
+      <div class='date'>
+        <label>Campaign Start</label>
+        <input type='datetime-local' formControlName="start" />
+      </div>
+      <div class='date'>
+        <label>Campaign End</label>
+        <input type='datetime-local' formControlName="end" />
+      </div>
+    </div>
+  </div>
+  <a (click)="addTimeslot()">+ Add Time Slot</a>
+  <div class='file'>
+    <label>Artwork</label>
+    <input type='file' (change)="cacheArtwork($event)" />
+  </div>
+  <div class='button' (click)="saveAdvertisement()">Save</div>
+  <div class='button delete' (click)="deleteAdvertisement()">Delete</div>
+</form>

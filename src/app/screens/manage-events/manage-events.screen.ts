@@ -42,6 +42,10 @@ export class ManageEventsScreen{
     this._router.navigate([`/events/${btoa(event.self)}`]);
   }
 
+  selectAdvertisement(advertisement: Advertisement){
+    this._router.navigate([`/advertisements/${btoa(advertisement.self)}`]);
+  }
+
   filterContent(newFilter: string){
     this.filter = newFilter;
   }

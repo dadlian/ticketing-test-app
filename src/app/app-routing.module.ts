@@ -47,6 +47,7 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
 import { CreateAdvertisementScreen } from './screens/create-advertisement/create-advertisement.screen';
+import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify-advertisement.screen';
 
 
 const routes: Routes = [
@@ -142,6 +143,10 @@ const routes: Routes = [
       {
         path:'hosts/:host/create-advertisement',
         component:CreateAdvertisementScreen
+      },
+      {
+        path:'advertisements/:advertisement',
+        component:ModifyAdvertisementScreen
       },
       {
         path:'events/create-showing',

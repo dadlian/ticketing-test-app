@@ -52,6 +52,7 @@ import { ManageSubmissionsScreen } from './screens/manage-submissions/manage-sub
 import { ManageZonesScreen } from './screens/manage-zones/manage-zones.screen';
 import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
 import { CreateAdvertisementScreen } from './screens/create-advertisement/create-advertisement.screen';
+import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify-advertisement.screen';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
     ManageSubmissionsScreen,
     ManageZonesScreen,
     CreateZoneScreen,
-    CreateAdvertisementScreen
+    CreateAdvertisementScreen,
+    ModifyAdvertisementScreen
   ],
   imports: [
     BrowserModule,
