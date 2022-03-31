@@ -79,4 +79,34 @@ form{
   .button.delete{
     background-color: #FF2222;
   }
+
+  .zone{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    select{
+      margin-bottom: 0px;
+    }
+
+    .remove{
+      margin-left: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  .timeslot{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .remove{
+      color: #FF0000;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
 }

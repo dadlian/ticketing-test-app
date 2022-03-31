@@ -18,8 +18,7 @@ export class CreateAdvertisementScreen{
 
   private _artwork: string;
 
-  constructor(private _activatedRoute: ActivatedRoute, private _ticketing: TickeTing,
-              private _router: Router, private _sessionManager: SessionManager,
+  constructor(private _ticketing: TickeTing, private _router: Router,
               private _eventManager: EventManager){
     this.error = "";
     this.zones = [];
@@ -66,7 +65,7 @@ export class CreateAdvertisementScreen{
 
     let host = this._eventManager.getActiveHost()
     host.createAdvertisement(payload).then((advertisement: Advertisement) => {
-      this._router.navigate(["/hosts/"+name]);
+      this._router.navigate(["/hosts", host.name, "advertisements"]);
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:
@@ -82,11 +81,19 @@ export class CreateAdvertisementScreen{
     (this.advertisementForm.get('zones') as FormArray).push(new FormControl(""))
   }
 
+  removeZone(i: number){
+    (this.advertisementForm.get('zones') as FormArray).removeAt(i)
+  }
+
   addTimeslot(){
     (this.advertisementForm.get('schedule') as FormArray).push(new FormGroup({
       start: new FormControl(""),
       end: new FormControl("")
     }))
+  }
+
+  removeTimeslot(i: number){
+    (this.advertisementForm.get('schedule') as FormArray).removeAt(i)
   }
 
   cacheArtwork(event){

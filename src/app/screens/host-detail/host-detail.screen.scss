@@ -66,10 +66,9 @@ h2{
       align-items: center;
 
       .button{
-        width:100px;
+        width:40%;
         height:20px;
         margin:0px;
-        margin-right:25px;
       }
     }
   }
@@ -88,6 +87,12 @@ h2{
   }
 }
 
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  width: 225px;
+}
+
 .button{
   display:block;
   background-color:#0022AA;
@@ -99,6 +104,10 @@ h2{
   margin:0 auto;
   text-align: center;
   cursor:pointer;
+}
+
+.button.submit{
+  background-color: #009933;
 }
 
 .button.inactive{

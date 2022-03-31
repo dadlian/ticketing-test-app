@@ -96,7 +96,7 @@ export class ModifyAdvertisementScreen{
     this._advertisement.save().then((success: boolean) => {
       if(success){
         let host = this._eventManager.getActiveHost()
-        this._router.navigate([`/hosts/${host.name}`]);
+        this._router.navigate(["/hosts", host.name, "advertisements"]);
       }else{
         this.error = "The TickeTing server experienced an error. Please try again later."
       }
@@ -120,7 +120,7 @@ export class ModifyAdvertisementScreen{
     this._advertisement.delete().then((success: boolean) => {
       if(success){
         let host = this._eventManager.getActiveHost()
-        this._router.navigate([`/hosts/${host.name}`]);
+        this._router.navigate(["/hosts", host.name, "advertisements"]);
       }else{
         this.error = "The TickeTing server experienced an error. Please try again later."
       }
@@ -142,11 +142,19 @@ export class ModifyAdvertisementScreen{
     (this.advertisementForm.get('zones') as FormArray).push(new FormControl(""))
   }
 
+  removeZone(i: number){
+    (this.advertisementForm.get('zones') as FormArray).removeAt(i)
+  }
+
   addTimeslot(){
     (this.advertisementForm.get('schedule') as FormArray).push(new FormGroup({
       start: new FormControl(""),
       end: new FormControl("")
     }))
+  }
+
+  removeTimeslot(i: number){
+    (this.advertisementForm.get('schedule') as FormArray).removeAt(i)
   }
 
   cacheArtwork(event){

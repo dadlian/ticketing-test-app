@@ -11,11 +11,14 @@ import { AuthorisedGuard } from './guards/authorised.guard';
 import { UnauthorisedGuard } from './guards/unauthorised.guard';
 import { VerifiedGuard } from './guards/verified.guard';
 import { UnverifiedGuard } from './guards/unverified.guard';
+import { ActiveHostGuard } from './guards/active-host.guard';
 import { ActiveEventGuard } from './guards/active-event.guard';
+import { ActiveAdGuard } from './guards/active-ad.guard';
 import { ActiveOrderGuard } from './guards/active-order.guard';
 
 import { SessionManager } from './services/session.manager';
 import { EventManager } from './services/event.manager';
+import { AdManager } from './services/ad.manager';
 import { OrderManager } from './services/order.manager';
 import { ResetManager } from './services/reset.manager';
 
@@ -35,7 +38,7 @@ import { TransferScreen } from './screens/transfer/transfer.screen';
 
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
-import { ManageEventsScreen } from './screens/manage-events/manage-events.screen';
+import { HostDetailScreen } from './screens/host-detail/host-detail.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { ModifyEventScreen } from './screens/modify-event/modify-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
@@ -72,7 +75,7 @@ import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify
     TransferScreen,
     ManageHostsScreen,
     CreateHostScreen,
-    ManageEventsScreen,
+    HostDetailScreen,
     CreateEventScreen,
     ModifyEventScreen,
     CreateShowingScreen,
@@ -101,6 +104,7 @@ import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify
   providers: [
     SessionManager,
     EventManager,
+    AdManager,
     OrderManager,
     ResetManager,
     AuthorisedGuard,
@@ -108,6 +112,8 @@ import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify
     VerifiedGuard,
     UnverifiedGuard,
     ActiveEventGuard,
+    ActiveHostGuard,
+    ActiveAdGuard,
     ActiveOrderGuard
   ],
   bootstrap: [AppComponent]

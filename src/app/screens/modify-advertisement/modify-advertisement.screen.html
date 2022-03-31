@@ -7,16 +7,18 @@
     <option [value]="null">Please select an event (optional)</option>
     <option *ngFor="let event of events; let i = index" [value]="i">{{event.title}}</option>
   </select>
-  <div formArrayName="zones"
+  <div class="zone" formArrayName="zones"
         *ngFor="let zone of advertisementForm.get('zones').value; let i = index;">
     <select [formControlName]="i">
       <option value="">Please select an ad zone</option>
       <option *ngFor="let zone of zones" value="{{zone.number}}">{{zone.name}}</option>
     </select>
+    <div class='remove' (click)="removeZone(i)">x</div>
   </div>
   <a (click)="addZone()">+ Add Zone</a>
-  <div formArrayName="schedule" class='timezone'
+  <div formArrayName="schedule" class='timeslot'
         *ngFor="let timeslot of advertisementForm.get('schedule').value; let i = index;">
+    <div class='remove' (click)="removeTimeslot(i)">- Remove Time Slot</div>
     <div [formGroupName]="i">
       <div class='date'>
         <label>Campaign Start</label>
