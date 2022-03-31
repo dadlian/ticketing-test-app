@@ -43,32 +43,22 @@ export class ManageSubmissionsScreen{
     this.events = newSubmissions;
   }
 
-  approveAdvertisement(advertisement: Advertisement){
+  approveAdvertisement(i: number){
+    let advertisement = this.advertisements[i]
+
     advertisement.approve().then(result => {
       if(result){
-        let newSubmissions = [];
-        for(let submission of this.advertisements){
-          if(submission !== advertisement){
-            newSubmissions.push(advertisement)
-          }
-        }
-
-        this.advertisements = newSubmissions;
+        this.advertisements.splice(i, 1)
       }
     })
   }
 
-  denyAdvertisement(advertisement: Advertisement){
+  denyAdvertisement(i: number){
+    let advertisement = this.advertisements[i]
+
     advertisement.deny().then(result => {
       if(result){
-        let newSubmissions = [];
-        for(let submission of this.advertisements){
-          if(submission !== advertisement){
-            newSubmissions.push(advertisement)
-          }
-        }
-
-        this.advertisements = newSubmissions;
+        this.advertisements.splice(i, 1)
       }
     })
   }

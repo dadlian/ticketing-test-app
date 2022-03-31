@@ -30,12 +30,12 @@
     <th></th>
     <th></th>
   </tr>
-  <tr *ngFor="let advertisement of advertisements">
+  <tr *ngFor="let advertisement of advertisements; let i = index">
     <td><img class='artwork' src='{{advertisement.artwork}}' /></td>
     <td>{{advertisement.name}}</td>
     <td>{{getZones(advertisement)}}</td>
     <td>{{advertisement.schedule[0].start | date:'dd MMMM, yyyy'}} to {{advertisement.schedule[0].end | date:'dd MMMM, yyyy'}}</td>
-    <td><div class='button' (click)="approveAdvertisement(advertisement)">Approve</div></td>
-    <td><div class='button cancel' (click)="denyAdvertisement(advertisement)">Deny</div></td>
+    <td><div class='button' (click)="approveAdvertisement(i)">Approve</div></td>
+    <td><div class='button cancel' (click)="denyAdvertisement(i)">Deny</div></td>
   </tr>
 </table>
