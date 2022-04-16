@@ -51,6 +51,8 @@ import { CreateZoneScreen } from './screens/create-zone/create-zone.screen';
 import { CreateAdvertisementScreen } from './screens/create-advertisement/create-advertisement.screen';
 import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify-advertisement.screen';
 
+import { RedeemTicketsScreen } from './screens/redeem-tickets/redeem-tickets.screen';
+
 
 const routes: Routes = [
   {
@@ -209,6 +211,10 @@ const routes: Routes = [
       {
         path:'create-zone',
         component:CreateZoneScreen
+      },
+      {
+        path:'redeem-tickets',
+        component:RedeemTicketsScreen
       }
     ]
   },

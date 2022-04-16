@@ -1,0 +1,89 @@
+h2{
+  text-align:center;
+}
+
+.container{
+  width:600px;
+  margin:10px auto;
+  font-family: sans-serif;
+
+  form{
+    width: 100%;
+
+    select,
+    input{
+      width: 100%;
+      margin: 5px 0px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    input{
+      max-width: 585px;
+    }
+  }
+}
+
+.filters{
+  width:500px;
+  margin:10px auto;
+  display:flex;
+  justify-content: center;
+
+  .filter{
+    margin:10px;
+    cursor:pointer;
+    padding:5px;
+  }
+
+  .filter.active{
+    background-color:#2423AA;
+    color:#FFFFFF;
+  }
+}
+
+.ticket{
+  width:600px;
+  display: flex;
+  justify-content: space-between;
+  margin:10px auto;
+  border:solid 1px #888888;
+  border-radius:5px;
+  padding:10px;
+  align-items: center;
+  font-family: sans-serif;
+
+  .name{
+    font-weight:bold;
+    font-size:20px;
+  }
+
+  .balance{
+    font-size:25px;
+
+    .button{
+      display:block;
+      background-color:#0022AA;
+      width:150px;
+      color:#FFFFFF;
+      outline:none;
+      border:0px;
+      padding:10px;
+      margin:0 auto;
+      text-align: center;
+      cursor:pointer;
+      font-size: 16px;
+    }
+
+    .button.disabled{
+      background-color:#AAAAAA;
+    }
+  }
+}
+
+.message{
+  width:600px;
+  margin:15px auto;
+  font-weight: bold;
+  text-align: center;
+}
