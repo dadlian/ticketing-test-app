@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { Event, TickeTing } from '@ticketing/angular';
+import { Host, Event, TickeTing } from '@ticketing/angular';
+
+import { SessionManager } from '../../services/session.manager';
 
 @Component({
   templateUrl: './sales-summary.screen.html',
   styleUrls:['./sales-summary.screen.scss']
 })
 export class SalesSummaryScreen{
+  public hosts: Array<Host>
+  public host: Host
   public events: Array<Event>
   public event: Event
 
@@ -13,7 +17,9 @@ export class SalesSummaryScreen{
   public sections: Array<string>
   public modifiers: {[key: string]: Array<string>}
 
-  constructor(private _ticketing: TickeTing){
+  constructor(private _ticketing: TickeTing, private _sessionManager: SessionManager){
+    this.hosts = []
+    this.host = null
     this.events = []
     this.event = null
 
@@ -23,7 +29,21 @@ export class SalesSummaryScreen{
   }
 
   ngOnInit(){
-    this._ticketing.event.search("", 500, 1).then(events => {
+    this._ticketing.host.list(this._sessionManager.getActiveSession().account).then(hosts => {
+      for(let host of hosts){
+        this.hosts.push(host);
+      }
+    }).catch((error: number) => {
+      this.hosts.length = 0;
+    })
+  }
+
+  changeHost(host: any){
+    this.host = this.hosts[host.target.value]
+    this.event = null
+    this.events.length = 0
+
+    this.host.events.then(events => {
       for(let event of events){
         this.events.push(event);
       }
@@ -33,15 +53,7 @@ export class SalesSummaryScreen{
   }
 
   changeEvent(event: any){
-    this.event = null
-    let eventURI = event.target.value
-
-    for(let event of this.events){
-      if(event.self == eventURI){
-        this.event = event
-        break
-      }
-    }
+    this.event = this.events[event.target.value]
 
     if(this.event){
       this.event.sales.then(summary => {

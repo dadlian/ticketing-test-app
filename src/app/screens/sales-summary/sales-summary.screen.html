@@ -1,9 +1,13 @@
 <h2>Sales Summary</h2>
 
 <div class='container'>
+  <select (change)="changeHost($event)">
+    <option value="">Please select an event host</option>
+    <option *ngFor="let host of hosts; let i=index" value="{{i}}">{{host.name}}</option>
+  </select>
   <select (change)="changeEvent($event)">
-    <option value="">Please select an event to scan</option>
-    <option *ngFor="let event of events" value="{{event.self}}">{{event.title}}</option>
+    <option value="">Please select an event</option>
+    <option *ngFor="let event of events; let i=index" value="{{i}}">{{event.title}}</option>
   </select>
 </div>
 <table *ngIf="event" class="summary">
