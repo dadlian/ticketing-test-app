@@ -1,0 +1,55 @@
+h2{
+  text-align:center;
+}
+
+.container{
+  width:600px;
+  margin:10px auto;
+  font-family: sans-serif;
+
+  select{
+    width: 100%;
+    margin: 5px 0px;
+    padding: 5px;
+    font-size: 16px;
+  }
+}
+
+.summary{
+  border-collapse: collapse;
+  margin: 0 auto;
+
+  th{
+    min-width: 100px;
+    text-align: center;
+    padding: 5px;
+    border: solid 1px black;
+  }
+
+  .category{
+    min-width: 200px;
+    text-align: left;
+  }
+
+  td{
+    min-width: 100px;
+    text-align: center;
+    padding: 5px;
+    border-left:1px solid black;
+    border-right:1px solid black;
+
+  }
+
+  td:first-child{
+    text-align: left;
+  }
+
+  .section{
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+
+    td{
+      font-weight: bold;
+    }
+  }
+}

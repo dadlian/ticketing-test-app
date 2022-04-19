@@ -1,0 +1,157 @@
+<h2>Sales Summary</h2>
+
+<div class='container'>
+  <select (change)="changeEvent($event)">
+    <option value="">Please select an event to scan</option>
+    <option *ngFor="let event of events" value="{{event.self}}">{{event.title}}</option>
+  </select>
+</div>
+<table *ngIf="event" class="summary">
+  <thead>
+    <tr>
+      <th class="category" rowspan="2">Category</th>
+      <th rowspan="2">Total</th>
+      <th *ngFor="let section of sections" [attr.colspan]="modifiers[section].length+1">{{section}}</th>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let section of sections">
+        <th>Total</th>
+        <th *ngFor="let modifier of modifiers[section]">{{modifier}}</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unit Price</td>
+      <td>N/A</td>
+      <ng-container *ngFor="let section of sections">
+        <td>N/A</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].unit_price | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Fee Band</td>
+      <td>N/A</td>
+      <ng-container *ngFor="let section of sections">
+        <td>N/A</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].unit_fees | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Quantity</td>
+      <td>{{summary.tickets}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>{{summary.sections[section].tickets}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          {{summary.sections[section].modifiers[modifier].tickets}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr class="section">
+      <td>Sales</td>
+      <td>${{summary.sales | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].sales | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].sales | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Sales Returns</td>
+      <td>${{summary.returns | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].returns | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].returns | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Host Fees</td>
+      <td>${{summary.host_fees | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].host_fees | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].host_fees | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Gross Payout Due</td>
+      <td>${{summary.gross_due | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].gross_due | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].gross_due | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Convenience Fees</td>
+      <td>${{summary.convenience_fees | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].convenience_fees | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].convenience_fees | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Convenience Fee Returns</td>
+      <td>${{summary.convenience_returns | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].convenience_returns | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].convenience_returns | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr class="section">
+      <td>Total Transacted</td>
+      <td>${{summary.transacted | number:'.2-2'}}</td>
+      <ng-container *ngFor="let section of sections">
+        <td>${{summary.sections[section].transacted | number:'.2-2'}}</td>
+        <td *ngFor="let modifier of modifiers[section]">
+          ${{summary.sections[section].modifiers[modifier].transacted | number:'.2-2'}}
+        </td>
+      </ng-container>
+    </tr>
+    <tr>
+      <td>Sales Revenue</td>
+      <td colspan="100%">${{summary.sales_revenue | number:'.2-2'}}</td>
+    </tr>
+    <tr>
+      <td>Ad Revenue</td>
+      <td colspan="100%">${{summary.advertising_revenue | number:'.2-2'}}</td>
+    </tr>
+    <tr>
+      <td>Management Revenue</td>
+      <td colspan="100%">${{summary.management_revenue | number:'.2-2'}}</td>
+    </tr>
+    <tr>
+      <td>Net Payout Due</td>
+      <td colspan="100%">${{summary.net_due | number:'.2-2'}}</td>
+    </tr>
+    <tr>
+      <td>Payout Made</td>
+      <td colspan="100%">${{summary.payouts | number:'.2-2'}}</td>
+    </tr>
+    <tr class="section">
+      <td>Gross Revenue</td>
+      <td colspan="100%">${{summary.gross_revenue | number:'.2-2'}}</td>
+    </tr>
+    <tr class="section">
+      <td>Merchant Fees</td>
+      <td colspan="100%">${{summary.merchant_fees | number:'.2-2'}}</td>
+    </tr>
+    <tr class="section">
+      <td>Net Revenue</td>
+      <td colspan="100%">${{summary.net_revenue | number:'.2-2'}}</td>
+    </tr>
+  </tbody>
+</table>
