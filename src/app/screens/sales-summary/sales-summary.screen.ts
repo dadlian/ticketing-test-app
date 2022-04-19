@@ -43,6 +43,8 @@ export class SalesSummaryScreen{
     this.event = null
     this.events.length = 0
     this.summary = {}
+    this.sections = []
+    this.modifiers = {}
 
     this.host.events.then(events => {
       for(let event of events){
@@ -56,6 +58,8 @@ export class SalesSummaryScreen{
   changeEvent(event: any){
     this.event = this.events[event.target.value]
     this.summary = {}
+    this.sections = []
+    this.modifiers = {}
 
     if(this.event){
       this.event.sales.then(summary => {
