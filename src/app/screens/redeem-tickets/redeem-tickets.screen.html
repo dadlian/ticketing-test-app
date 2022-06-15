@@ -15,18 +15,24 @@
 </div>
 
 <div *ngIf="section" class='filters'>
-  <div class='filter' (click)="setStatus('Issued')" [ngClass]="{'active':status == 'Issued'}">Issued</div>
-  <div class='filter' (click)="setStatus('Redeemed')" [ngClass]="{'active':status == 'Redeemed'}">Redeemed</div>
-  <div class='filter' (click)="setStatus('Held')" [ngClass]="{'active':status == 'Held'}">Held for Transfer</div>
+  <div class='filter' (click)="setStatus('Issued')" [ngClass]="{'active':status == 'Issued'}">Issued ({{counts['Issued']}})</div>
+  <div class='filter' (click)="setStatus('Redeemed')" [ngClass]="{'active':status == 'Redeemed'}">Redeemed ({{counts['Redeemed']}})</div>
+  <div class='filter' (click)="setStatus('Held')" [ngClass]="{'active':status == 'Held'}">Held for Transfer ({{counts['Held']}})</div>
+  <div class='filter' (click)="loadDigest()" [ngClass]="{'active':status == 'Scan'}">Scan</div>
 </div>
 
-<div class='ticket' *ngFor="let ticket of tickets">
-  <div>
-    <div class='name'>{{ticket.serial}}</div>
-    <div class='contact'>{{ticket.owner.firstName}} {{ticket.owner.lastName}}</div>
+<ng-container *ngIf="status != 'Scan'">
+  <div class='ticket' *ngFor="let ticket of tickets">
+    <div>
+      <div class='name'>{{ticket.serial}}</div>
+      <div class='contact'>{{ticket.owner.firstName}} {{ticket.owner.lastName}}</div>
+    </div>
+    <div class='balance'>
+      <div class='button' [ngClass]="{disabled: status !== 'Issued'}" (click)="redeemTicket(ticket)">Redeem</div>
+    </div>
   </div>
-  <div class='balance'>
-    <div class='button' [ngClass]="{disabled: status !== 'Issued'}" (click)="redeemTicket(ticket)">Redeem</div>
-  </div>
+</ng-container>
+<div class='scanner' *ngIf="status == 'Scan'">
+  <ngx-scanner-qrcode (data)="scanTicket($event)" #scanner></ngx-scanner-qrcode>
 </div>
 <div class='message' *ngIf="section && tickets.length == 0">There are no tickets matching your search</div>

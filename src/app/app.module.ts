@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { TickeTingModule } from '@ticketing/angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -103,6 +104,7 @@ import { SalesSummaryScreen } from './screens/sales-summary/sales-summary.screen
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgxScannerQrcodeModule,
     TickeTingModule.forRoot({environment: environment.name}),
   ],
   providers: [
