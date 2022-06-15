@@ -138,7 +138,7 @@ export class RedeemTicketsScreen{
 
   private _loadTickets(){
     this.tickets.length = 0
-    this.section.getTickets(this.status, this.serial, 1, 20).then(tickets => {
+    this.section.getTickets(this.status, this.serial, 1, 50).then(tickets => {
       this.tickets = tickets
     })
 
