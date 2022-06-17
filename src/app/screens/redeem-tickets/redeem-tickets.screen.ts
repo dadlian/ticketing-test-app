@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Event, Section, Ticket, TickeTing } from '@ticketing/angular';
+import { Event, Section, Ticket, Digest, TickeTing } from '@ticketing/angular';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode'
 
 import * as CryptoJS from 'crypto-js'
@@ -12,17 +12,21 @@ import * as CryptoJS from 'crypto-js'
 export class RedeemTicketsScreen{
   @ViewChild("scanner", {static: false}) scanner: NgxScannerQrcodeComponent;
 
-  public events: Array<Event>;
-  public selectionForm: FormGroup;
+  public events: Array<Event>
+  public selectionForm: FormGroup
+  public sectionToggles: {[key: string]: boolean}
 
   public event: Event;
-  public section: Section;
+  public sections: Array<Section>;
   public tickets: Array<Ticket>;
   public counts: {[key: string]: number}
-  public digest: Array<string>;
+  public redeeming: boolean;
+  public candidate: any
 
   public status: string;
   public serial: string;
+
+  private _digests: Array<Digest>;
 
   constructor(private _ticketing: TickeTing){
     this.events = [];
@@ -33,11 +37,12 @@ export class RedeemTicketsScreen{
       serial: new FormControl("")
     })
 
+    this.sectionToggles = {}
     this.event = null;
-    this.section = null;
+    this.sections = [];
     this.tickets = []
     this.counts = {}
-    this.digest = []
+    this._digests = []
     this.scanner = null;
     this.counts = {
       "Issued": 0,
@@ -47,6 +52,9 @@ export class RedeemTicketsScreen{
 
     this.status = "Issued";
     this.serial = "";
+
+    this.redeeming = false;
+    this.candidate = null;
   }
 
   ngOnInit(){
@@ -61,29 +69,32 @@ export class RedeemTicketsScreen{
 
   changeEvent(){
     this.event = null
-    this.section = null
+    this.sections = []
     this.tickets.length = 0
 
     for(let event of this.events){
       if(event.self == this.selectionForm.value.event){
         this.event = event
+
+        this.sectionToggles = {}
+        for(let section of event.sections){
+          this.sectionToggles[section.name] = false
+        }
+
         break
       }
     }
   }
 
-  changeSection(){
-    this.section = null
+  toggleSection(section: Section){
+    this.sectionToggles[section.name] = !this.sectionToggles[section.name]
 
-    if(this.event){
-      for(let section of this.event.sections){
-        if(section.self == this.selectionForm.value.section){
-          this.section = section
-          this._loadTickets()
-
-          break
-        }
-      }
+    if(this.sectionToggles[section.name]){
+      this.sections.push(section)
+      this._loadTickets()
+      this.loadDigest()
+    }else{
+      this.sections.splice(this.sections.indexOf(section), 1)
     }
   }
 
@@ -93,7 +104,7 @@ export class RedeemTicketsScreen{
     let currentSerial = this.serial
     setTimeout(() => {
       if(currentSerial == this.serial){
-        if(this.event && this.section){
+        if(this.event && this.sections.length > 0){
           this._loadTickets()
         }
       }
@@ -111,6 +122,19 @@ export class RedeemTicketsScreen{
     })
   }
 
+  redeemCandidate(){
+    if(this.candidate.status !== "Issued"){
+      return
+    }
+
+    this.candidate.redeem().then(result => {
+      this.candidate.status = "Redeemed"
+      this._loadCounts()
+      this.loadDigest()
+    }).catch(error => {
+    })
+  }
+
   setStatus(status: string){
     this.status = status
     this._loadTickets()
@@ -118,35 +142,66 @@ export class RedeemTicketsScreen{
 
   loadDigest(){
     this.status = "Scan"
-    this.digest.length = 0
-    this.section.getDigest().then(digest => {
-      for(let ticket of digest){
-        let fingerprint = CryptoJS.SHA256(
-          `${ticket.serial};${ticket.owner}`
-        ).toString(CryptoJS.enc.Hex)
+    this.redeeming = false
 
-        this.digest[fingerprint] = ticket.serial
-      }
+    this._digests.length = 0
+    for(let section of this.sections){
+      section.getDigest().then(digest => {
+        this._digests.push(digest)
+      })
+    }
 
+    setTimeout(() => {
       this.scanner.start();
-    })
+    }, 100)
   }
 
   scanTicket(code){
-    console.log(code)
+    if(code && !this.redeeming){
+      this.redeeming = true
+      this.candidate = null
+
+      for(let i = 0; i < this._digests.length; i++){
+        let result = this._digests[i].validate(code)
+        if(result){
+          this.sections[i].getTickets(
+            result.status,
+            result.serial,
+            1,
+            1
+          ).then(tickets => {
+            this.candidate = tickets[0]
+            this.candidate.status = result.status
+          })
+
+          break
+        }
+      }
+    }
   }
 
   private _loadTickets(){
     this.tickets.length = 0
-    this.section.getTickets(this.status, this.serial, 1, 50).then(tickets => {
-      this.tickets = tickets
-    })
 
+    for(let section of this.sections){
+      section.getTickets(this.status, this.serial, 1, 10).then(tickets => {
+        this.tickets = this.tickets.concat(tickets)
+      })
+    }
+
+    this._loadCounts()
+  }
+
+  private _loadCounts(){
     //Load counts
     for(let status of ['Issued','Redeemed','Held']){
-      this.section.countTickets(status).then(count => {
-        this.counts[status] = count;
-      })
+      this.counts[status] = 0
+
+      for(let section of this.sections){
+        section.countTickets(status).then(count => {
+          this.counts[status] += count;
+        })
+      }
     }
   }
 }

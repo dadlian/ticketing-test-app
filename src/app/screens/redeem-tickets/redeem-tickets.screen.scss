@@ -47,6 +47,25 @@ h2{
   width: 600px;
 }
 
+.section{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  input{
+    width: 15px !important;
+    display: block;
+  }
+
+  label{
+    margin-left: 10px;
+  }
+}
+
+.search{
+  margin-top: 15px !important;
+}
+
 .ticket{
   width:600px;
   display: flex;
@@ -84,6 +103,18 @@ h2{
       background-color:#AAAAAA;
     }
   }
+}
+
+.button{
+  display:block;
+  background-color:#0022AA;
+  width:300px;
+  color:#FFFFFF;
+  outline:none;
+  border:0px;
+  padding:10px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .message{

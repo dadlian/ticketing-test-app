@@ -11,9 +11,11 @@
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/redeem-tickets']">Redeem Tickets</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/sales']">Sales</div>
   </div>
-  <div>
+  <div class='profile'>
     <span>Hi, {{account?.firstName}}!</span>
     <span (click)='logout()'>(Logout)</span>
   </div>
 </div>
-<router-outlet></router-outlet>
+<div class='wrapper'>
+  <router-outlet></router-outlet>
+</div>

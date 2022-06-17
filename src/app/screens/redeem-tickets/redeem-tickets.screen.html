@@ -6,15 +6,17 @@
       <option value="">Please select an event to scan</option>
       <option *ngFor="let event of events" value="{{event.self}}">{{event.title}}</option>
     </select>
-    <select formControlName="section" (change)="changeSection()">
-      <option value="">Please select an event section to scan</option>
-      <option *ngFor="let section of event?.sections" value="{{section.self}}">{{section.name}}</option>
-    </select>
-    <input *ngIf="section" placeholder="Search fo ticket serial" type="text" formControlName="serial" (input)="searchTicket()" />
+    <h3 *ngIf="event">Select the sections you want to scan</h3>
+    <div class='section' *ngFor="let section of event?.sections; let i = index">
+      <input type="checkbox" name="{{section.name}}" [checked]="sectionToggles[section.name]"
+                (change)="toggleSection(section)" />
+      <label for="{{section.name}}">{{section.name}}</label>
+    </div>
+    <input class='search' *ngIf="sections.length > 0" placeholder="Search for ticket serial" type="text" formControlName="serial" (input)="searchTicket()" />
   </form>
 </div>
 
-<div *ngIf="section" class='filters'>
+<div *ngIf="sections.length > 0" class='filters'>
   <div class='filter' (click)="setStatus('Issued')" [ngClass]="{'active':status == 'Issued'}">Issued ({{counts['Issued']}})</div>
   <div class='filter' (click)="setStatus('Redeemed')" [ngClass]="{'active':status == 'Redeemed'}">Redeemed ({{counts['Redeemed']}})</div>
   <div class='filter' (click)="setStatus('Held')" [ngClass]="{'active':status == 'Held'}">Held for Transfer ({{counts['Held']}})</div>
@@ -31,8 +33,30 @@
       <div class='button' [ngClass]="{disabled: status !== 'Issued'}" (click)="redeemTicket(ticket)">Redeem</div>
     </div>
   </div>
+  <div class='message' *ngIf="sections.length > 0 && tickets.length == 0">There are no tickets matching your search</div>
 </ng-container>
 <div class='scanner' *ngIf="status == 'Scan'">
-  <ngx-scanner-qrcode (data)="scanTicket($event)" #scanner></ngx-scanner-qrcode>
+  <ng-container  *ngIf="!redeeming; else results">
+    <ngx-scanner-qrcode (data)="scanTicket($event)" #scanner></ngx-scanner-qrcode>
+  </ng-container>
+  <ng-template #results>
+    <ng-container *ngIf="candidate; else nocandidate">
+      <div class='ticket'>
+        <div>
+          <div class='name'>{{candidate.serial}}</div>
+          <div class='contact'>{{candidate.owner.firstName}} {{candidate.owner.lastName}}</div>
+        </div>
+        <div class='balance'>
+          <div class='button' *ngIf="candidate.status == 'Issued'; else redeemed" (click)="redeemCandidate()">Redeem</div>
+          <ng-template #redeemed>
+            <div>{{candidate.status}}</div>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #nocandidate>
+      <div class='message'>Invalid ticket for this event section</div>
+    </ng-template>
+    <div class="button" (click)="loadDigest()">Scan Again</div>
+  </ng-template>
 </div>
-<div class='message' *ngIf="section && tickets.length == 0">There are no tickets matching your search</div>

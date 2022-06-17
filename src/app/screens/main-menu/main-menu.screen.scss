@@ -3,8 +3,11 @@
   background-color:#0022AA;
   display:flex;
   justify-content: space-between;
+  flex-wrap: nowrap;
   padding:10px;
   margin-bottom:50px;
+  min-width: 1024px;
+  width: 100%;
 
   .options{
     display:flex;
@@ -14,15 +17,26 @@
     }
   }
 
+  .profile{
+    width: 150px;
+    display: flex;
+  }
+
   div{
     cursor:pointer;
   }
 
   span{
     margin-right:10px;
+    display: block;
   }
 
   span:last-child{
     cursor:pointer;
   }
+}
+
+.wrapper{
+  min-width: 1024px;
+  width: 100%;
 }
