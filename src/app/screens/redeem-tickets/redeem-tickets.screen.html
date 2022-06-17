@@ -10,7 +10,7 @@
     <div class='section' *ngFor="let section of event?.sections; let i = index">
       <input type="checkbox" name="{{section.name}}" [checked]="sectionToggles[section.name]"
                 (change)="toggleSection(section)" />
-      <label for="{{section.name}}">{{section.name}}</label>
+      <label for="{{section.name}}" (click)="toggleSection(section)">{{section.name}}</label>
     </div>
     <input class='search' *ngIf="sections.length > 0" placeholder="Search for ticket serial" type="text" formControlName="serial" (input)="searchTicket()" />
   </form>
