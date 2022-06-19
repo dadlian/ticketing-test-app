@@ -93,7 +93,10 @@ export class RedeemTicketsScreen{
       this.sections.push(section)
       this._loadTickets()
       this._loadCounts()
-      this.loadDigest()
+
+      if(this.status == "Scan"){
+        this.loadDigest()
+      }
     }else{
       this.sections.splice(this.sections.indexOf(section), 1)
     }
