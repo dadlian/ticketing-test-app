@@ -92,6 +92,7 @@ export class RedeemTicketsScreen{
     if(this.sectionToggles[section.name]){
       this.sections.push(section)
       this._loadTickets()
+      this._loadCounts()
       this.loadDigest()
     }else{
       this.sections.splice(this.sections.indexOf(section), 1)
@@ -118,6 +119,7 @@ export class RedeemTicketsScreen{
 
     ticket.redeem().then(result => {
       this._loadTickets()
+      this._loadCounts()
     }).catch(error => {
     })
   }
@@ -184,12 +186,10 @@ export class RedeemTicketsScreen{
     this.tickets.length = 0
 
     for(let section of this.sections){
-      section.getTickets(this.status, this.serial, 1, 10).then(tickets => {
+      section.getTickets(this.status, this.serial, 1, 1).then(tickets => {
         this.tickets = this.tickets.concat(tickets)
       })
     }
-
-    this._loadCounts()
   }
 
   private _loadCounts(){
