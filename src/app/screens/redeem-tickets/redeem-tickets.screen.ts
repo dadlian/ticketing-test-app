@@ -91,15 +91,16 @@ export class RedeemTicketsScreen{
 
     if(this.sectionToggles[section.name]){
       this.sections.push(section)
-      this._loadTickets()
-      this._loadCounts()
-
-      if(this.status == "Scan"){
-        this.loadDigest()
-      }
     }else{
       this.sections.splice(this.sections.indexOf(section), 1)
     }
+
+    if(this.status == "Scan"){
+      this.loadDigest()
+    }
+
+    this._loadTickets()
+    this._loadCounts()
   }
 
   searchTicket(){
