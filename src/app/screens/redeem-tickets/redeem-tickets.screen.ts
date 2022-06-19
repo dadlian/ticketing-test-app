@@ -160,6 +160,7 @@ export class RedeemTicketsScreen{
 
   scanTicket(code){
     if(code && !this.redeeming){
+      this.scanner.stop();
       this.redeeming = true
       this.candidate = null
 
