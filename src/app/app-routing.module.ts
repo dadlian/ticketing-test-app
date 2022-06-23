@@ -54,6 +54,7 @@ import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify
 import { RedeemTicketsScreen } from './screens/redeem-tickets/redeem-tickets.screen';
 
 import { SalesSummaryScreen } from './screens/sales-summary/sales-summary.screen';
+import { UsersScreen } from './screens/users/users.screen';
 
 
 const routes: Routes = [
@@ -221,6 +222,10 @@ const routes: Routes = [
       {
         path:'sales',
         component:SalesSummaryScreen
+      },
+      {
+        path:'users',
+        component:UsersScreen
       }
     ]
   },
