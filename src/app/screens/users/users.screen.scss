@@ -1,3 +1,159 @@
 h1{
   text-align:center;
 }
+
+.container{
+  width:700px;
+  margin:10px auto;
+  font-family: sans-serif;
+
+  .search{
+    display: flex;
+
+    input{
+      width: 500px;
+      margin: 5px 0px;
+      padding: 5px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+  }
+
+  .button{
+    display:block;
+    background-color:#0022AA;
+    width:150px;
+    color:#FFFFFF;
+    outline:none;
+    border:0px;
+    padding:10px;
+    text-align: center;
+    cursor:pointer;
+    font-size: 16px;
+  }
+
+  .button.disabled{
+    background-color:#AAAAAA;
+  }
+
+  .account{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 175px;
+    max-width: 700px;
+
+    .field{
+      display: flex;
+      margin-bottom: 10px;
+      margin-right: 10px;
+
+      .name{
+        font-weight: bold;
+        width: 125px;
+      }
+    }
+  }
+
+  .submenu{
+    width:100%;
+    max-width: 700px;
+    margin:5px 0px;
+    display:flex;
+    justify-content: space-between;
+    border-top: solid black 1px;
+    padding-top: 15px;
+
+    .item{
+      cursor:pointer;
+      padding:5px;
+    }
+
+    .item.active{
+      background-color:#2423AA;
+      color:#FFFFFF;
+    }
+  }
+
+  .message{
+    width:700px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .filters{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    width:100%;
+    max-width: 700px;
+
+    .filter{
+      width: calc(25% - 10px);
+      display: flex;
+      flex-direction: column;
+
+      .label{
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .value{
+        font-size: 14px;
+        padding: 5px;
+      }
+    }
+  }
+
+  .listing{
+    margin: 20px 0px;
+
+    table{
+      border-collapse: collapse;
+      min-width: 700px;
+
+      thead{
+        th{
+          padding: 10px;
+          color: #FFFFFF;
+          background-color:#2423AA;
+          text-align: left;
+        }
+      }
+
+      tbody{
+        tr{
+          td{
+            white-space: nowrap;
+            padding: 10px;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        tr.even{
+          td{
+            background-color: #FFFFFF;
+          }
+        }
+
+        tr.odd{
+          td{
+            background-color: #CDEEFD;
+          }
+        }
+
+      }
+    }
+  }
+
+  .transfers{
+    .sender{
+      cursor: pointer;
+      font-weight: bold;
+      color: #0398DC;
+    }
+  }
+}

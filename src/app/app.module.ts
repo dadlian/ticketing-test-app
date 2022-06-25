@@ -59,6 +59,7 @@ import { CreateAdvertisementScreen } from './screens/create-advertisement/create
 import { ModifyAdvertisementScreen } from './screens/modify-advertisement/modify-advertisement.screen';
 import { RedeemTicketsScreen } from './screens/redeem-tickets/redeem-tickets.screen';
 import { SalesSummaryScreen } from './screens/sales-summary/sales-summary.screen';
+import { UsersScreen } from './screens/users/users.screen';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { SalesSummaryScreen } from './screens/sales-summary/sales-summary.screen
     CreateAdvertisementScreen,
     ModifyAdvertisementScreen,
     RedeemTicketsScreen,
-    SalesSummaryScreen
+    SalesSummaryScreen,
+    UsersScreen
   ],
   imports: [
     BrowserModule,

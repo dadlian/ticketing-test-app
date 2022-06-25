@@ -99,7 +99,6 @@ export class RedeemTicketsScreen{
       this.loadDigest()
     }
 
-    this._loadTickets()
     this._loadCounts()
   }
 
@@ -122,7 +121,6 @@ export class RedeemTicketsScreen{
     }
 
     ticket.redeem().then(result => {
-      this._loadTickets()
       this._loadCounts()
     }).catch(error => {
     })
@@ -143,7 +141,6 @@ export class RedeemTicketsScreen{
 
   setStatus(status: string){
     this.status = status
-    this._loadTickets()
   }
 
   loadDigest(){

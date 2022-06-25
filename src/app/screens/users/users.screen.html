@@ -1,1 +1,369 @@
 <h1>User Activity</h1>
+
+<div class='container'>
+  <div class='search'>
+    <input type='text' [value]="query" (change)="updateQuery($event)"
+            placeholder='Please enter a username or email address' />
+    <div class='button' (click)="search()" [ngClass]="{disabled: loading}">Search</div>
+  </div>
+  <ng-container *ngIf="activity; else noactivity">
+    <h2>{{activity.account.title}}. {{activity.account.firstName}} {{activity.account.lastName}} ({{activity.account.username}})</h2>
+    <div class='account'>
+      <div class='field'>
+        <div class='name'>Role</div>
+        <div class='value'>{{activity.account.role}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Account #</div>
+        <div class='value'>{{activity.account.number}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Date of Birth</div>
+        <div class='value'>{{activity.account.dateOfBirth}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Email</div>
+        <div class='value'>{{activity.account.email}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Verified</div>
+        <div class='value'>{{activity.account.verified?'Yes':'No'}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Activated</div>
+        <div class='value'>{{activity.account.activated?'Yes':'No'}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Phone</div>
+        <div class='value'>{{activity.account.phone}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Address 1</div>
+        <div class='value'>{{activity.account.firstAddressLine}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Address 2</div>
+        <div class='value'>{{activity.account.secondAddressLine}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>City</div>
+        <div class='value'>{{activity.account.city}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>State</div>
+        <div class='value'>{{activity.account.state}}</div>
+      </div>
+      <div class='field'>
+        <div class='name'>Country</div>
+        <div class='value'>{{activity.account.country}}</div>
+      </div>
+    </div>
+
+    <div class='submenu'>
+      <div class='item' [ngClass]="{active: category=='sessions'}"
+            (click)="selectCategory('sessions')">
+        Sessions ({{activity.sessions.length}})
+      </div>
+      <div class='item' [ngClass]="{active: category=='orders'}"
+            (click)="selectCategory('orders')">
+        Orders ({{activity.orders.length}})
+      </div>
+      <div class='item' [ngClass]="{active: category=='incoming'}"
+            (click)="selectCategory('incoming')">
+        Transfers In ({{activity.transfers.incoming.length}})
+      </div>
+      <div class='item' [ngClass]="{active: category=='outgoing'}"
+            (click)="selectCategory('outgoing')">
+        Transfers Out ({{activity.transfers.outgoing.length}})
+      </div>
+      <div class='item' [ngClass]="{active: category=='tickets'}"
+            (click)="selectCategory('tickets')">
+        Tickets ({{activity.tickets.length}})
+      </div>
+    </div>
+
+    <div *ngIf="category=='sessions'" class='sessions listing'>
+      <div class='filters'>
+        <div class='filter'>
+          <div class='label'>Status</div>
+          <select class='value' (change)="addFilter('open',$event)">
+            <option value="">All</option>
+            <option value="true">Active</option>
+            <option value="false">Ended</option>
+          </select>
+        </div>
+      </div>
+      <table *ngIf="getCategoryListing().length; else noitems">
+        <thead>
+          <tr>
+            <th>Logged In</th>
+            <th>Logged Out</th>
+            <th>IP Address</th>
+            <th>User Agent</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let session of getCategoryListing(); let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+            <td>{{session.started | date:"Y-MM-dd HH:mm"}}</td>
+            <td>{{session.ended?(session.ended | date:"Y-MM-dd HH:mm"):"N/A"}}</td>
+            <td>{{session.ip}}</td>
+            <td>{{session.agent}}</td>
+            <td>{{session.open?"Active":"Ended"}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="category=='orders'" class='orders listing'>
+      <div class='filters'>
+        <div class='filter'>
+          <div class='label'>Number</div>
+          <input class='value' type='text' (keyup)="addFilter('number',$event)">
+        </div>
+        <div class='filter'>
+          <div class='label'>Status</div>
+          <select class='value' (change)="addFilter('status',$event)">
+            <option value="">All</option>
+            <option>Placed</option>
+            <option>Cancelled</option>
+            <option>Timed Out</option>
+            <option>Fulfilled</option>
+            <option>Voided</option>
+            <option>Returned</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Event</div>
+          <select class='value' (change)="addFilter('event',$event)">
+            <option value="">All</option>
+            <option *ngFor="let event of events">{{event.title}}</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Section</div>
+          <select class='value' (change)="addFilter('section',$event)">
+            <option value="">All</option>
+            <ng-container *ngIf="filters[category]['event']">
+              <ng-container *ngFor="let event of events">
+                <ng-container *ngIf="event.title == filters[category]['event']">
+                  <option *ngFor="let section of event.sections">{{section.name}}</option>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <table *ngIf="getCategoryListing().length; else noitems">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Placed</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of getCategoryListing(); let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+            <td>{{order.number}}</td>
+            <td>{{order.placed | date:"Y-MM-dd HH:mm"}}</td>
+            <td>{{order.status}}</td>
+            <td>{{order.total}}</td>
+            <td>
+              <div *ngFor="let item of order.items">
+                {{item.quantity}}x {{item.event}}: {{item.section}}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="category=='incoming'" class='transfers listing'>
+      <div class='filters'>
+        <div class='filter'>
+          <div class='label'>Sender</div>
+          <input class='value' type='text' (keyup)="addFilter('sender',$event)">
+        </div>
+        <div class='filter'>
+          <div class='label'>Status</div>
+          <select class='value' (change)="addFilter('status',$event)">
+            <option value="">All</option>
+            <option>Pending</option>
+            <option>Claimed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Event</div>
+          <select class='value' (change)="addFilter('event',$event)">
+            <option value="">All</option>
+            <option *ngFor="let event of events">{{event.title}}</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Section</div>
+          <select class='value' (change)="addFilter('section',$event)">
+            <option value="">All</option>
+            <ng-container *ngIf="filters[category]['event']">
+              <ng-container *ngFor="let event of events">
+                <ng-container *ngIf="event.title == filters[category]['event']">
+                  <option *ngFor="let section of event.sections">{{section.name}}</option>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <table *ngIf="getCategoryListing().length; else noitems">
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Sent</th>
+            <th>Status</th>
+            <th>Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transfer of getCategoryListing(); let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+            <td class="sender" (click)="search(transfer.sender.username)">{{transfer.sender.firstName}} {{transfer.sender.lastName}} ({{transfer.sender.username}})</td>
+            <td>{{transfer.sent | date:"Y-MM-dd HH:mm"}}</td>
+            <td>{{transfer.status}}</td>
+            <td>
+              <div *ngFor="let entry of transfer.tickets">
+                {{entry.quantity}}x {{entry.event}}: {{entry.section}}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="category=='outgoing'" class='transfers listing'>
+      <div class='filters'>
+        <div class='filter'>
+          <div class='label'>Recipient</div>
+          <input class='value' type='text' (keyup)="addFilter('recipient',$event)">
+        </div>
+        <div class='filter'>
+          <div class='label'>Status</div>
+          <select class='value' (change)="addFilter('status',$event)">
+            <option value="">All</option>
+            <option>Pending</option>
+            <option>Claimed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Event</div>
+          <select class='value' (change)="addFilter('event',$event)">
+            <option value="">All</option>
+            <option *ngFor="let event of events">{{event.title}}</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Section</div>
+          <select class='value' (change)="addFilter('section',$event)">
+            <option value="">All</option>
+            <ng-container *ngIf="filters[category]['event']">
+              <ng-container *ngFor="let event of events">
+                <ng-container *ngIf="event.title == filters[category]['event']">
+                  <option *ngFor="let section of event.sections">{{section.name}}</option>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <table *ngIf="getCategoryListing().length; else noitems">
+        <thead>
+          <tr>
+            <th>Recipient</th>
+            <th>Received</th>
+            <th>Status</th>
+            <th>Tickets</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transfer of getCategoryListing(); let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+            <td class="sender" (click)="search(transfer.recipient.username)">{{transfer.recipient.firstName}} {{transfer.recipient.lastName}} ({{transfer.recipient.username}})</td>
+            <td>{{transfer.sent | date:"Y-MM-dd HH:mm"}}</td>
+            <td>{{transfer.status}}</td>
+            <td>
+              <div *ngFor="let entry of transfer.tickets">
+                {{entry.quantity}}x {{entry.event}}: {{entry.section}}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="category=='tickets'" class='tickets listing'>
+      <div class='filters'>
+        <div class='filter'>
+          <div class='label'>Event</div>
+          <select class='value' (change)="addFilter('event',$event)">
+            <option value="">All</option>
+            <option *ngFor="let event of events">{{event.title}}</option>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Section</div>
+          <select class='value' (change)="addFilter('section',$event)">
+            <option value="">All</option>
+            <ng-container *ngIf="filters[category]['event']">
+              <ng-container *ngFor="let event of events">
+                <ng-container *ngIf="event.title == filters[category]['event']">
+                  <option *ngFor="let section of event.sections">{{section.name}}</option>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </select>
+        </div>
+        <div class='filter'>
+          <div class='label'>Serial</div>
+          <input class='value' type='text' (keyup)="addFilter('serial',$event)">
+        </div>
+        <div class='filter'>
+          <div class='label'>Status</div>
+          <select class='value' (change)="addFilter('status',$event)">
+            <option value="">All</option>
+            <option>Issued</option>
+            <option>Held</option>
+            <option>Redeemed</option>
+            <option>Expired</option>
+          </select>
+        </div>
+      </div>
+      <table *ngIf="getCategoryListing().length; else noitems">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Section</th>
+            <th>Serial</th>
+            <th>Issued</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of getCategoryListing(); let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+            <td>{{ticket.event}}</td>
+            <td>{{ticket.section}}</td>
+            <td>{{ticket.serial}}</td>
+            <td>{{ticket.issued | date:"Y-MM-dd HH:mm"}}</td>
+            <td>{{ticket.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noitems>
+      <div class="message">There are presently no items to display</div>
+    </ng-template>
+
+  </ng-container>
+  <ng-template #noactivity>
+    <div class="message">{{message}}</div>
+  </ng-template>
+</div>
