@@ -3,12 +3,12 @@
     <div [routerLink]="['/']">Home</div>
     <div [routerLink]="['/wallet']">Wallet</div>
     <div [routerLink]="['/list-transfers']">Transfers</div>
-    <div [routerLink]="['/hosts']">Hosts</div>
+    <div *ngIf="account?.role == 'administrator' || account?.role == 'host'" [routerLink]="['/hosts']">Hosts</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/venues']">Venues</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/categories']">Categories</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/zones']">Zones</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/submissions']">Submissions</div>
-    <div *ngIf="account?.role == 'administrator'" [routerLink]="['/users']">Users</div>
+    <div *ngIf="account?.role == 'administrator' || account?.role == 'support'" [routerLink]="['/users']">Users</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/redeem-tickets']">Redeem Tickets</div>
     <div *ngIf="account?.role == 'administrator'" [routerLink]="['/sales']">Sales</div>
   </div>
