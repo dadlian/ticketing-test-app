@@ -11,6 +11,9 @@
   <input type='text' formControlName="secondAddressLine" placeholder='Please enter the host second address line' />
   <input type='text' formControlName="city" placeholder='Please enter the host city' />
   <input type='text' formControlName="state" placeholder='Please enter the host state' />
-  <input type='text' formControlName="country" placeholder='Please enter the host country' />
+  <select type='text' formControlName="country">
+    <option value=''>Please select the host country</option>
+    <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+  </select>
   <div class='button' (click)="registerHost()">Register Host</div>
 </form>

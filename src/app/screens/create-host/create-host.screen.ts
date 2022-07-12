@@ -11,10 +11,12 @@ import { SessionManager } from '../../services/session.manager';
 })
 export class CreateHostScreen{
   public error: string;
+  public countries: Array<string>;
   public hostForm: FormGroup;
 
   constructor(private _ticketing: TickeTing, private _router: Router, private _sessionManager: SessionManager){
     this.error = "";
+    this.countries = [];
 
     this.hostForm = new FormGroup({
       name: new FormControl(""),
@@ -28,6 +30,12 @@ export class CreateHostScreen{
       city: new FormControl(""),
       state: new FormControl(""),
       country: new FormControl("")
+    })
+  }
+
+  ngOnInit(){
+    this._ticketing.system.countries().then(countries => {
+      this.countries = countries
     })
   }
 

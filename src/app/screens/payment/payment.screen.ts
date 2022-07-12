@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Order, INVALID_STATE, INVALID_VALUES, SERVER_ERROR } from '@ticketing/angular';
+import { TickeTing, Order, INVALID_STATE, INVALID_VALUES, SERVER_ERROR } from '@ticketing/angular';
 
 import { OrderManager } from '../../services/order.manager';
 
@@ -12,10 +12,12 @@ import { OrderManager } from '../../services/order.manager';
 export class PaymentScreen{
   public order: Order;
   public error: string;
+  public countries: Array<string>;
   public timeLeft: {minutes: number, seconds: number};
   public paymentForm: FormGroup;
 
-  constructor(private _orderManager: OrderManager, private _router: Router){
+  constructor(private _orderManager: OrderManager, private _router: Router,
+              private _ticketing: TickeTing){
     this.paymentForm = new FormGroup({
       cardholder: new FormControl(""),
       number: new FormControl(""),
@@ -30,12 +32,18 @@ export class PaymentScreen{
       email: new FormControl(""),
       phone: new FormControl("")
     })
+
+    this.countries = []
   }
 
   ngOnInit(){
     this.order = this._orderManager.getActiveOrder();
     this.error = "";
     this._getTimeLeft();
+
+    this._ticketing.system.countries().then(countries => {
+      this.countries = countries
+    })
   }
 
   cancelOrder(){

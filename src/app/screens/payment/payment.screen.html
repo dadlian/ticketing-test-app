@@ -27,7 +27,10 @@
   <input type='text' formControlName="cvv" placeholder='Please enter your card cvv' />
   <input type='text' formControlName="expiryDate" placeholder='Please enter your card expiryDate' />
   <input type='text' formControlName="address1" placeholder='Please enter your first address line' />
-  <input type='text' formControlName="country" placeholder='Please enter your country' />
+  <select formControlName="country">
+    <option value=''>Please enter your country</option>
+    <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+  </select>
   <input type='email' formControlName="email" placeholder='Please enter cardholder email address' />
   <input type='phone' formControlName="phone" placeholder='Please enter cardholder phone number' />
   <div class='button' (click)="payForOrder()">Confirm Order</div>
