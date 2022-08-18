@@ -25,6 +25,10 @@ export class ManageHostsScreen{
     })
   }
 
+  loadHost(host){
+    this._router.navigate(['/hosts',btoa(host.self),'events'])
+  }
+
   registerHost(){
     this._router.navigate(["/create-host"])
   }

@@ -1,45 +1,90 @@
-<h2>{{host?.name}}</h2>
-<div class='filters'>
-  <div class='filter' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
-  <div class='filter' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
-</div>
-<div class='list' *ngIf="filter == 'events'">
-  <div class='host' *ngFor="let event of host?.events | async" (click)="selectEvent(event)">
-    <div class='event-details'>
-      <img src='{{event.thumbnail+"?"+timestamp}}' />
-      <div>
-        <div class='name'>{{event.title}}</div>
-        <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
-        <div>{{event.venue.name}}</div>
-      </div>
-    </div>
-    <h3>Showings</h3>
-    <div class='showings' *ngIf="(event.showings | async)?.length">
-      <div class='showing' *ngFor="let showing of event.showings | async" (click)="selectEvent(showing)">
-        <div>{{showing.title}}</div>
-        <div>{{showing.start | date:'dd MMMM, yyyy hh:mm'}}</div>
-      </div>
-    </div>
-    <a class='link' (click)="createShowing(event)">+ Add Showing</a>
+<div class='container'>
+  <h1>{{host?.name}}</h1>
+  <div class='field description'>
+    <div class='name'>Description</div>
+    <div class='value'>{{host?.description}}</div>
   </div>
-  <div class='button' [routerLink]="['/hosts',host?.name,'create-event']">Create Event</div>
-</div>
-<div class='list' *ngIf="filter == 'advertisements'">
-  <div class='host' *ngFor="let advertisement of host?.advertisements | async">
-    <div class='advertisement-details'>
-      <img src='{{advertisement.artwork}}' />
-      <div class='content'>
+  <div class='details'>
+    <div class='field'>
+      <div class='name'>Contact</div>
+      <div class='value'>{{host?.contact}}</div>
+    </div>
+    <div class='field'>
+      <div class='name'>Email</div>
+      <div class='value'><a href="{{'mailto:'+host?.email}}">{{host?.email}}</a></div>
+    </div>
+    <div class='field'>
+      <div class='name'>Phone</div>
+      <div class='value'><a href="{{'tel:'+host?.phone}}">{{host?.phone}}</a></div>
+    </div>
+    <div class='field'>
+      <div class='name'>Website</div>
+      <div class='value'><a href="{{host?.website}}">{{host?.website}}</a></div>
+    </div>
+    <div class='field'>
+      <div class='name'>Country</div>
+      <div class='value'>{{host?.country}}</div>
+    </div>
+    <div class='field'>
+      <div class='name'>Address 1</div>
+      <div class='value'>{{host?.firstAddressLine}}</div>
+    </div>
+    <div class='field'>
+      <div class='name'>Address 2</div>
+      <div class='value'>{{host?.secondAddressLine}}</div>
+    </div>
+    <div class='field'>
+      <div class='name'>City</div>
+      <div class='value'>{{host?.city}}</div>
+    </div>
+    <div class='field'>
+      <div class='name'>State</div>
+      <div class='value'>{{host?.state}}</div>
+    </div>
+  </div>
+  <div class='left button'  (click)="editHost()">Edit Host</div>
+  <div class='filters'>
+    <div class='filter' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
+    <div class='filter' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
+  </div>
+  <div class='list' *ngIf="filter == 'events'">
+    <div class='host' *ngFor="let event of host?.events | async" (click)="selectEvent(event)">
+      <div class='event-details'>
+        <img src='{{event.thumbnail+"?"+timestamp}}' />
         <div>
-          <div class='name'>{{advertisement.name}}</div>
-          <div *ngFor="let timeslot of advertisement.schedule" class='contact'>{{timeslot.start | date:'dd MMMM, yyyy'}} to {{timeslot.end | date:'dd MMMM, yyyy'}}</div>
-          <div *ngFor="let zone of advertisement.zones">{{zone.name}}</div>
+          <div class='name'>{{event.title}}</div>
+          <div class='contact'>{{event.start | date:'dd MMMM, yyyy'}}</div>
+          <div>{{event.venue.name}}</div>
         </div>
-        <div class='buttons'>
-          <div class='button' (click)="selectAdvertisement(advertisement)">Edit</div>
-          <div class='button submit' [ngClass]="{inactive:advertisement.status !== 'Draft'}" (click)="submitAd(advertisement)">Submit</div>
+      </div>
+      <h3>Showings</h3>
+      <div class='showings' *ngIf="(event.showings | async)?.length">
+        <div class='showing' *ngFor="let showing of event.showings | async" (click)="selectEvent(showing)">
+          <div>{{showing.title}}</div>
+          <div>{{showing.start | date:'dd MMMM, yyyy hh:mm'}}</div>
+        </div>
+      </div>
+      <a class='link' (click)="createShowing(event)">+ Add Showing</a>
+    </div>
+    <div class='button' [routerLink]="['/hosts',host?.name,'create-event']">Create Event</div>
+  </div>
+  <div class='list' *ngIf="filter == 'advertisements'">
+    <div class='host' *ngFor="let advertisement of host?.advertisements | async">
+      <div class='advertisement-details'>
+        <img src='{{advertisement.artwork}}' />
+        <div class='content'>
+          <div>
+            <div class='name'>{{advertisement.name}}</div>
+            <div *ngFor="let timeslot of advertisement.schedule" class='contact'>{{timeslot.start | date:'dd MMMM, yyyy'}} to {{timeslot.end | date:'dd MMMM, yyyy'}}</div>
+            <div *ngFor="let zone of advertisement.zones">{{zone.name}}</div>
+          </div>
+          <div class='buttons'>
+            <div class='button' (click)="selectAdvertisement(advertisement)">Edit</div>
+            <div class='button submit' [ngClass]="{inactive:advertisement.status !== 'Draft'}" (click)="submitAd(advertisement)">Submit</div>
+          </div>
         </div>
       </div>
     </div>
+    <div class='button' [routerLink]="['/hosts',host?.name,'create-advertisement']">Create Advertisement</div>
   </div>
-  <div class='button' [routerLink]="['/hosts',host?.name,'create-advertisement']">Create Advertisement</div>
 </div>

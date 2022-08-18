@@ -23,16 +23,17 @@ export class HostDetailScreen{
 
   ngOnInit(){
     this.filter = this._activatedRoute.snapshot.params.tab
-    this._ticketing.host.list(this._sessionManager.getActiveSession().account).then(hosts => {
-      for(let host of hosts){
-        if(host.name == this._activatedRoute.snapshot.params.host){
-          this.host = host;
-          this._eventManager.setActiveHost(host)
-          this.timestamp = Date.now()
-          break;
-        }
-      }
+
+    let hostURI = atob(this._activatedRoute.snapshot.params.host)
+    this._ticketing.host.retrieve(hostURI).then(host => {
+      this.host = host;
+      this._eventManager.setActiveHost(host)
+      this.timestamp = Date.now()
     })
+  }
+
+  editHost(){
+    this._router.navigate([`/hosts/${btoa(this.host.self)}/edit`])
   }
 
   createShowing(event: Event){

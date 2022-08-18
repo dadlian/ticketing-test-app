@@ -98,7 +98,7 @@ export class PaymentScreen{
   }
 
   private _getTimeLeft(){
-    this.timeLeft = this.order.getTimeLeft()
+    this.timeLeft = this.order.timeLeft
 
     setTimeout(() => {
       this._getTimeLeft()

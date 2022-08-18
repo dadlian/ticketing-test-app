@@ -40,6 +40,7 @@ import { TransferScreen } from './screens/transfer/transfer.screen';
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
 import { HostDetailScreen } from './screens/host-detail/host-detail.screen';
+import { ModifyHostScreen } from './screens/modify-host/modify-host.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
 import { ModifyEventScreen } from './screens/modify-event/modify-event.screen';
 import { CreateShowingScreen } from './screens/create-showing/create-showing.screen';
@@ -80,6 +81,7 @@ import { UsersScreen } from './screens/users/users.screen';
     ManageHostsScreen,
     CreateHostScreen,
     HostDetailScreen,
+    ModifyHostScreen,
     CreateEventScreen,
     ModifyEventScreen,
     CreateShowingScreen,

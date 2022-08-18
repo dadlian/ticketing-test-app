@@ -55,7 +55,7 @@ export class CreateHostScreen{
       state: this.hostForm.value.state,
       country: this.hostForm.value.country
     },this._sessionManager.getActiveSession().account).then((host: Host) => {
-      this._router.navigate(["/"]);
+      this._router.navigate(["/hosts"]);
     }).catch((error: number) => {
       switch(error){
         case INVALID_VALUES:

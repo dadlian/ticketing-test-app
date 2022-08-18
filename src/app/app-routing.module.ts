@@ -26,6 +26,7 @@ import { TransferScreen } from './screens/transfer/transfer.screen';
 
 import { ManageHostsScreen } from './screens/manage-hosts/manage-hosts.screen';
 import { CreateHostScreen } from './screens/create-host/create-host.screen';
+import { ModifyHostScreen } from './screens/modify-host/modify-host.screen';
 
 import { HostDetailScreen } from './screens/host-detail/host-detail.screen';
 import { CreateEventScreen } from './screens/create-event/create-event.screen';
@@ -143,6 +144,10 @@ const routes: Routes = [
         path:'hosts/:host/create-event',
         component:CreateEventScreen,
         canActivate:[ActiveHostGuard]
+      },
+      {
+        path:'hosts/:host/edit',
+        component:ModifyHostScreen
       },
       {
         path:'hosts/:host/create-advertisement',

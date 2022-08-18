@@ -1,6 +1,6 @@
 <h2>Select Your Event Host</h2>
 <div class='list'>
-  <div class='host' *ngFor="let host of hosts" [routerLink]="['/hosts',host.name,'events']">
+  <div class='host' *ngFor="let host of hosts" (click)="loadHost(host)">
     <div>
       <div class='name'>{{host.name}}</div>
       <div class='contact'>{{host.contact}}</div>

@@ -1,17 +1,61 @@
-h2{
-  text-align:center;
+.container{
+  width:600px;
+  margin:10px auto;
+  font-family: sans-serif;
+}
+
+h1{
+  width: 100%;
+  margin: 10px 0px;
+  margin-bottom: 25px;
+}
+
+.description{
+  width: 100%;
+  margin: 10px 0px;
+
+  .value{
+    margin-right: 10px;
+    width: calc(100% - 125px);
+  }
+}
+
+.field{
+  display: flex;
+  margin-bottom: 10px;
+
+  .name{
+    font-weight: bold;
+    width: 125px;
+  }
+}
+
+.details{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: space-between;
+  height: 150px;
+  width:600px;
+  margin: 0 auto;
+  font-family: sans-serif;
 }
 
 .filters{
-  width:500px;
-  margin:10px auto;
+  width:100%;
+  max-width: 600px;
+  margin:5px 0px;
+  margin-top: 15px;
   display:flex;
-  justify-content: center;
+  justify-content: flex-start;
+  border-top: solid black 1px;
+  border-bottom: solid black 1px;
+  padding: 10px 0px;
 
   .filter{
-    margin:10px;
     cursor:pointer;
     padding:5px;
+    margin-right: 10px;
   }
 
   .filter.active{
@@ -21,14 +65,14 @@ h2{
 }
 
 .host{
+  margin-top: 10px;
   cursor:pointer;
-  width:500px;
-  margin:10px auto;
   border:solid 1px #888888;
   border-radius:5px;
   padding:5px;
   align-items: flex-start;
   font-family: sans-serif;
+  margin-bottom: 15px;
 
   .event-details{
     display: flex;
@@ -104,6 +148,11 @@ h2{
   margin:0 auto;
   text-align: center;
   cursor:pointer;
+}
+
+.button.left{
+  margin: 0px;
+  margin-bottom: 10px
 }
 
 .button.submit{
