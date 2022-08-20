@@ -41,24 +41,23 @@ h1{
   font-family: sans-serif;
 }
 
-.filters{
+.submenu{
   width:100%;
   max-width: 600px;
-  margin:5px 0px;
-  margin-top: 15px;
+  margin:15px 0px;
   display:flex;
   justify-content: flex-start;
   border-top: solid black 1px;
   border-bottom: solid black 1px;
   padding: 10px 0px;
 
-  .filter{
+  .item{
     cursor:pointer;
     padding:5px;
     margin-right: 10px;
   }
 
-  .filter.active{
+  .item.active{
     background-color:#2423AA;
     color:#FFFFFF;
   }
@@ -163,6 +162,10 @@ h1{
   background-color:#AAAAAA;
 }
 
+.message{
+  font-weight: bold;
+}
+
 .showing{
   display: flex;
   justify-content: space-between;
@@ -170,4 +173,88 @@ h1{
   border-bottom:1px solid black;
   padding:5px;
   margin-bottom:5px;
+}
+
+.listing{
+  margin: 20px 0px;
+
+  .filters{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    width:100%;
+    max-width: 700px;
+
+    .filter{
+      display: flex;
+      flex-direction: column;
+
+      .label{
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .value{
+        font-size: 14px;
+        padding: 5px;
+        padding-left: 0px;
+        display: flex;
+
+        input{
+          width: 300px;
+          padding: 5px;
+        }
+
+        .button{
+          margin-left: 10px;
+          width: 150px;
+        }
+      }
+    }
+  }
+
+  table{
+    border-collapse: collapse;
+    width: 100%;
+
+    thead{
+      th{
+        padding: 10px;
+        color: #FFFFFF;
+        background-color:#2423AA;
+        text-align: left;
+      }
+    }
+
+    tbody{
+      tr{
+        td{
+          white-space: nowrap;
+          padding: 10px;
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          .remove{
+            font-weight: bold;
+            cursor: pointer;
+          }
+        }
+      }
+
+      tr.even{
+        td{
+          background-color: #FFFFFF;
+        }
+      }
+
+      tr.odd{
+        td{
+          background-color: #CDEEFD;
+        }
+      }
+
+    }
+  }
 }

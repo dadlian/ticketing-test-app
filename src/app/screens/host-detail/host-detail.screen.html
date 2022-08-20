@@ -43,9 +43,10 @@
     </div>
   </div>
   <div class='left button'  (click)="editHost()">Edit Host</div>
-  <div class='filters'>
-    <div class='filter' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
-    <div class='filter' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
+  <div class='submenu'>
+    <div class='item' (click)="filterContent('events')" [ngClass]="{'active':filter == 'events'}">Events</div>
+    <div class='item' (click)="filterContent('advertisements')" [ngClass]="{'active':filter == 'advertisements'}">Ads</div>
+    <div class='item' (click)="filterContent('administrators')" [ngClass]="{'active':filter == 'administrators'}">Administrators</div>
   </div>
   <div class='list' *ngIf="filter == 'events'">
     <div class='host' *ngFor="let event of host?.events | async" (click)="selectEvent(event)">
@@ -86,5 +87,38 @@
       </div>
     </div>
     <div class='button' [routerLink]="['/hosts',host?.name,'create-advertisement']">Create Advertisement</div>
+  </div>
+  <div class='listing' *ngIf="filter == 'administrators'">
+    <div class='filters'>
+      <div class='filter'>
+        <div class='label'>Username/Email</div>
+        <div class='value'>
+          <input class='value' type='text' (change)="updateCandidate($event)"/>
+          <div class='button' [ngClass]="{inactive: loading}" (click)="addAdministrator()">Add Admin</div>
+        </div>
+        <div class='message'>{{message}}</div>
+      </div>
+    </div>
+    <table *ngIf="administrators.length; else noitems">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email Address</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let administrator of administrators; let i = index" [ngClass]="{even: i%2 == 0, odd: i%2 == 1}">
+          <td>{{administrator.title}} {{administrator.firstName}} {{administrator.lastName}}</td>
+          <td>{{administrator.username}}</td>
+          <td><a href='mailto:{{administrator.email}}' target='_blank'>{{administrator.email}}</a></td>
+          <td *ngIf="activeUser.number != administrator.number"><a class='remove' (click)="removeAdministrator(administrator)">X</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noitems>
+      <div class="message">There are presently no items to display</div>
+    </ng-template>
   </div>
 </div>
