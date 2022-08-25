@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~12.2.16",
     "@angular/platform-browser-dynamic": "~12.2.16",
     "@angular/router": "~12.2.16",
-    "@ticketing/angular": "^1.0.8",
     "crypto-js": "^4.1.1",
     "ngx-scanner-qrcode": "^1.0.17",
     "rxjs": "~6.5.3",
