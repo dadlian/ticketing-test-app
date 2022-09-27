@@ -17,8 +17,8 @@
     <div class='ticket' *ngIf="section.active">
       <div class='details'>
         <div class='name'>{{section.name}}</div>
-        <div class='price'>EC${{section.getBestPrice(selection[section.id]).amount | currency:'':'':'.2-2'}} | US${{section.getBestPrice(selection[section.id]).amount/2.7 | currency:'':'':'.2-2'}}</div>
-        <div class='date'>This rate ends {{section.getBestPrice(selection[section.id]).availableFor | date:'dd MMMM, yyyy @ hh:mm'}}</div>
+        <div class='price'>EC${{currentPrices[section.id]?.amount | currency:'':'':'.2-2'}} | US${{currentPrices[section.id]?.amount/2.7 | currency:'':'':'.2-2'}}</div>
+        <div class='date'>This rate ends {{currentPrices[section.id]?.availableFor | date:'dd MMMM, yyyy @ hh:mm'}}</div>
       </div>
       <select (change)="updateOrder(section)" [(ngModel)]="selection[section.id]">
         <option *ngFor="let value of range" value="{{value}}">{{value > 9?value:'0'+value}}</option>
@@ -34,7 +34,7 @@
   <div class='ticket'>
     <div class='details'>
       <div class='name'>Total:</div>
-      <div class='price'>EC${{order.total | currency:'':'':'.2-2'}} | US${{order.total/2.7 | currency:'':'':'.2-2'}}</div>
+      <div class='price'>EC${{order.total + order.convenienceFees | currency:'':'':'.2-2'}} | US${{order.total/2.7 | currency:'':'':'.2-2'}}</div>
     </div>
   </div>
   <div class='error'>{{error}}</div>

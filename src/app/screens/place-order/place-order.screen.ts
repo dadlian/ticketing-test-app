@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event, Order, INVALID_VALUES, INVALID_STATE } from '@ticketing/angular';
+import { Event, Modifier, Order, INVALID_VALUES, INVALID_STATE } from '@ticketing/angular';
 
 import { SessionManager } from '../../services/session.manager';
 import { EventManager } from '../../services/event.manager';
@@ -16,12 +16,14 @@ export class PlaceOrderScreen{
   public range: Array<number>;
   public selection: any;
   public error: string;
+  public currentPrices: {[key: string]: {amount: number, availableFor: string, modifier: Modifier}}
 
   constructor(private _sessionManager: SessionManager, private _eventManager: EventManager, private _router: Router, private _orderManager: OrderManager){
     this.event = null;
     this.range = [0,1,2,3,4,5,6,7,8,9,10];
     this.selection = {};
     this.error = "";
+    this.currentPrices = {}
   }
 
   ngOnInit(){
@@ -29,12 +31,17 @@ export class PlaceOrderScreen{
     this.event = this._eventManager.getActiveEvent();
     for(let section of this.event.sections){
       this.selection[section.id] = 0;
+      this.currentPrices[section.id] = {amount: 0, availableFor: "", modifier: null}
     }
+
+    this._loadCurrentPrices()
   }
 
   updateOrder(section){
     this.error = "";
     this.order.addItem(section,this.selection[section.id])
+
+    this._loadCurrentPrices()
   }
 
   placeOrder(){
@@ -53,5 +60,13 @@ export class PlaceOrderScreen{
           this.error = "The TickeTing server experienced an error. Please try again later."
       }
     })
+  }
+
+  private _loadCurrentPrices(){
+    for(let section of this.event.sections){
+      section.getCurrentPrice(this.selection[section.id]).then(price => {
+        this.currentPrices[section.id] = price
+      })
+    }
   }
 }
