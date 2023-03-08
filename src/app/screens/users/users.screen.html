@@ -2,7 +2,7 @@
 
 <div class='container'>
   <div class='search'>
-    <input type='text' [value]="query" (change)="updateQuery($event)"
+    <input type='text' [value]="query" (change)="updateQuery($event)" (keyup.enter)="search()"
             placeholder='Please enter a username or email address' />
     <div class='button' (click)="search()" [ngClass]="{disabled: loading}">Search</div>
   </div>
@@ -31,7 +31,10 @@
       </div>
       <div class='field'>
         <div class='name'>Activated</div>
-        <div class='value'>{{activity.account.activated?'Yes':'No'}}</div>
+        <div class='value'>
+          {{activity.account.activated?'Yes':'No'}}
+          (<a (click)='toggleUser()'>{{activity.account.activated?'Deactivate':'Activate'}}</a>)
+        </div>
       </div>
       <div class='field'>
         <div class='name'>Phone</div>

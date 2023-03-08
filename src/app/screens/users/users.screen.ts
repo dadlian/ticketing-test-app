@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TickeTing, ActivitySummary, Event, NOT_FOUND } from '@ticketing/angular';
+import { TickeTing, ActivitySummary, Account, Event, NOT_FOUND } from '@ticketing/angular';
 
 @Component({
   templateUrl: './users.screen.html',
@@ -7,6 +7,7 @@ import { TickeTing, ActivitySummary, Event, NOT_FOUND } from '@ticketing/angular
 })
 export class UsersScreen{
   public activity: ActivitySummary;
+  public result: Account;
   public query: string;
   public message: string;
   public loading: boolean;
@@ -24,6 +25,7 @@ export class UsersScreen{
 
   constructor(private _ticketing: TickeTing){
     this.activity = null;
+    this.result = null;
     this.query = "";
     this.message = "";
     this.loading = false;
@@ -60,8 +62,10 @@ export class UsersScreen{
       this.category = "sessions"
 
       this._ticketing.account.findUser(this.query).then(account=> {
+        this.result = account
         account.getActivity().then(activity => {
           this.activity = activity
+          console.log(this.activity.account.activated)
         }).finally(() => {
           this.loading = false;
         })
@@ -133,5 +137,22 @@ export class UsersScreen{
 
   addFilter(name: string, value: any){
     this.filters[this.category][name] = value.target.value
+  }
+
+  toggleUser(){
+    if(this.activity.account.activated){
+      this.result.deactivate("Administrator deactivated account").then(success => {
+        if(success){
+          this.activity.account.activated = false
+        }
+      })
+
+    }else{
+      this.result.activate("Administrator reactivated account").then(success => {
+        if(success){
+          this.activity.account.activated = true
+        }
+      })
+    }
   }
 }
