@@ -26,7 +26,7 @@ export class RedeemTicketsScreen{
   public status: string;
   public serial: string;
 
-  private _digests: Array<Digest>;
+  private _digest: Digest;
 
   constructor(private _ticketing: TickeTing){
     this.events = [];
@@ -42,7 +42,7 @@ export class RedeemTicketsScreen{
     this.sections = [];
     this.tickets = []
     this.counts = {}
-    this._digests = []
+    this._digest = null
     this.scanner = null;
     this.counts = {
       "Issued": 0,
@@ -147,12 +147,9 @@ export class RedeemTicketsScreen{
     this.status = "Scan"
     this.redeeming = false
 
-    this._digests.length = 0
-    for(let section of this.sections){
-      section.getDigest().then(digest => {
-        this._digests.push(digest)
-      })
-    }
+    this.event.getDigest(this.sections).then(digest => {
+      this._digest = digest
+    })
 
     setTimeout(() => {
       this.scanner.start();
@@ -165,21 +162,18 @@ export class RedeemTicketsScreen{
       this.redeeming = true
       this.candidate = null
 
-      for(let i = 0; i < this._digests.length; i++){
-        let result = this._digests[i].validate(code)
-        if(result){
-          this.sections[i].getTickets(
-            result.status,
-            result.serial,
-            1,
-            1
-          ).then(tickets => {
-            this.candidate = tickets[0]
-            this.candidate.status = result.status
-          })
-
-          break
-        }
+      let result = this._digest.validate(code)
+      if(result){
+        this.event.getTickets(
+          result.status,
+          result.serial,
+          this.sections,
+          1,
+          1
+        ).then(tickets => {
+          this.candidate = tickets[0]
+          this.candidate.status = result.status
+        })
       }
     }
   }
@@ -187,11 +181,9 @@ export class RedeemTicketsScreen{
   private _loadTickets(){
     this.tickets.length = 0
 
-    for(let section of this.sections){
-      section.getTickets(this.status, this.serial, 1, 1).then(tickets => {
-        this.tickets = this.tickets.concat(tickets)
-      })
-    }
+    this.event.getTickets(this.status, this.serial, this.sections, 1, 1).then(tickets => {
+      this.tickets = this.tickets.concat(tickets)
+    })
   }
 
   private _loadCounts(){
@@ -199,11 +191,9 @@ export class RedeemTicketsScreen{
     for(let status of ['Issued','Redeemed','Held']){
       this.counts[status] = 0
 
-      for(let section of this.sections){
-        section.countTickets(status).then(count => {
-          this.counts[status] += count;
-        })
-      }
+      this.event.countTickets(status, this.sections).then(count => {
+        this.counts[status] += count;
+      })
     }
   }
 }
